@@ -1,0 +1,28 @@
+@use "sass:map";
+@import "theme";
+
+html,
+body {
+  margin: 0;
+}
+* {
+  font-family: "Roboto Thin";
+  margin: 0;
+  padding: 0;
+}
+.container {
+  max-width: 1170px;
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  margin: auto;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.col-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
