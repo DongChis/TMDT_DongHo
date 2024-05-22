@@ -50,6 +50,7 @@ const Header = () => {
     return (
         <>
         <div className="header__top">
+
             <div className="container">
                 <div className="row">
                     <div className="col-6 header__top_left">
@@ -63,6 +64,7 @@ const Header = () => {
                         </ul>
                     </div>
                     <div className="col-6 header__top_right">
+
                         <ul>
 
                             <li>

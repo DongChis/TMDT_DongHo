@@ -1,5 +1,6 @@
 @use "sass:map";
-@import 'style/pages/theme';
+
+@import "src/style/pages/theme";
 
 .footer {
   background: #ececec;
@@ -49,6 +50,7 @@
           text-decoration: none;
         }
       }
+
     }
   }
 }
