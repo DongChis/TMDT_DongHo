@@ -5,10 +5,10 @@ import {Link} from "react-router-dom";
 const Header = () => {
     return (
         <div className="header__top">
-            <div className="container">
-                <div className="row">
-                    <div className="col-6"></div>
-                    <div className="col-6 header__top_right">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-6"></div>
+                                <div className="col-6 header__top_right">
                         <ul>
                             <li>
                                 <Link to={"#"}><AiOutlineUser /></Link>
