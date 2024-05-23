@@ -1,0 +1,56 @@
+@use "sass:map";
+@import "src/style/pages/theme";
+
+
+
+.container-slider {
+  .section-title{
+    h2{
+      text-align: center;
+    }
+  }
+  .slider-content {
+    .slider-content-items {
+      height: 350px;
+      position: relative;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: top center;
+      left: 39%;
+
+      img {
+        background-color: #c71313;
+        margin-top: 30px;
+        height: 250px;
+
+
+      }
+
+      p {
+        position: absolute;
+
+        bottom: 0;
+        text-align: center;
+        font-size: 18px;
+        color: map.get($theme-color, "normal-text");
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        padding: 10px 0px 10px;
+        width: 270px;
+        cursor: pointer;
+
+        &:hover {
+          background: rgb(237 237 237);
+        }
+
+      }
+    }
+  }
+}
+
+
+
+
+
+

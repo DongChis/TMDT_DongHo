@@ -10,7 +10,7 @@ import {
 } from "react-icons/ai";
 const Footer = () => {
     return (
-        <footer className="footer">
+        <footer className="_footer">
             <div className="container">
                 <div className="row">
                     <div className="col-lg-3">
