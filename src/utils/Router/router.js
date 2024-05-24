@@ -3,5 +3,6 @@ export const ROUTERS = {
         home: "",
         profile: "/thong-tin-ca-nhan",
         product: "/san-pham"
+
     },
 }
