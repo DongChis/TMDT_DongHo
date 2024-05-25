@@ -7,11 +7,11 @@ import 'react-tabs/style/react-tabs.css';
 import "./style.scss"
 
 
-import mat1Img from  "image/slider1.jpg";
-import mat2Img from  "image/slider2.avif";
-import mat3Img from  "image/slider3.avif";
-import mat4Img from  "image/slider4.avif";
-import mat5Img from  "image/slider5.avif";
+import mat1Img from "assets/image/slider1.jpg";
+import mat2Img from "assets/image/slider2.avif";
+import mat3Img from "assets/image/slider3.avif";
+import mat4Img from "assets/image/slider4.avif";
+import mat5Img from "assets/image/slider5.avif";
 
 
 
