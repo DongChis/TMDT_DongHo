@@ -1,11 +1,14 @@
 import {memo, useState} from 'react'
 import "./style.scss";
-import {AiOutlineUser,AiOutlineTwitter,AiTwotoneStar,
-    AiOutlineMail,AiTwotoneCar,AiOutlineShoppingCart} from "react-icons/ai";
+import {
+    AiOutlineUser, AiOutlineTwitter, AiTwotoneStar,
+    AiOutlineMail, AiTwotoneCar, AiOutlineShoppingCart, AiOutlineMenu, AiOutlinePhone
+} from "react-icons/ai";
 import {Link} from "react-router-dom";
 import {ROUTERS} from "../../../utils/Router/router";
 
 const Header = () => {
+    const [isShowCategory,setShowCategory] = useState(true);
     const [menus,setMenus] = useState([
         {
             name: "Trang chủ",
@@ -127,6 +130,52 @@ const Header = () => {
                 </div>
             </div>
         </div>
+            <div className="container">
+                <div className="row heros__categories_container">
+                    <div className="col-lg-3 heros__categories">
+                        <div className="heros__categories_all" onClick={() => setShowCategory(!isShowCategory)}>
+                            <AiOutlineMenu />
+                            Danh sach san pham
+                        </div>
+                        {isShowCategory && (
+                            <ul>
+                                <li>
+                                    <Link to="a">sp1</Link>
+                                </li>
+                                <li>
+                                    <Link to="a">sp1</Link>
+                                </li>
+                                <li>
+                                    <Link to="a">sp1</Link>
+                                </li>
+                                <li>
+                                    <Link to="a">sp1</Link>
+                                </li>
+                            </ul>
+                        )}
+                    </div>
+                    <div className="col-lg-9 heros__search_container">
+                       <div className="hero_search">
+                           <div className="hero__search_form">
+                               <form action="">
+                                   <input type="text" placeholder="Ban dang can gi? "/>
+                                   <button className="" type="submit">Tim kiem</button>
+                               </form>
+                           </div>
+                           <div className="hero__search_phone">
+                               <div className="hero__search_phone_icon">
+                                   <AiOutlinePhone/>
+                               </div>
+                               <div className="hero__search_phone_text">
+                                   <p>0123.456.789</p>
+                                   <span>Ho tro 24/7</span>
+                               </div>
+                           </div>
+                       </div>
+
+                    </div>
+                </div>
+            </div>
         </>
     );
 };
