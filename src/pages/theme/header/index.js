@@ -2,7 +2,7 @@ import {memo, useState} from 'react'
 import "./style.scss";
 import {
     AiOutlineUser, AiOutlineTwitter, AiTwotoneStar,
-    AiOutlineMail, AiTwotoneCar, AiOutlineShoppingCart, AiOutlineMenu, AiOutlinePhone
+    AiOutlineMail, AiTwotoneCar, AiOutlineShoppingCart, AiOutlineMenu, AiOutlinePhone, AiOutlineHeart
 } from "react-icons/ai";
 import {Link} from "react-router-dom";
 import {ROUTERS} from "../../../utils/Router/router";
@@ -69,9 +69,11 @@ const Header = () => {
                     <div className="col-6 header__top_right">
 
                         <ul>
-
                             <li>
-                                <Link to={"#"}><AiOutlineTwitter /></Link>
+                                <Link to={"#"}><AiOutlineHeart/></Link>
+                            </li>
+                            <li>
+                                <Link to={"#"}><AiOutlineTwitter/></Link>
                             </li>
                             <li>
                                 <Link to={"#"}><AiTwotoneStar/></Link>
@@ -85,7 +87,7 @@ const Header = () => {
                 </div>
             </div>
         </div>
-        <div className="container">
+            <div className="container">
             <div className="row">
                 <div className="col-xl-3 col-lg-3">
                     <div className="header__logo">
@@ -135,7 +137,7 @@ const Header = () => {
                     <div className="col-lg-3 heros__categories">
                         <div className="heros__categories_all" onClick={() => setShowCategory(!isShowCategory)}>
                             <AiOutlineMenu />
-                            Danh sach san pham
+                            Danh sách sản phẩm
                         </div>
                         {isShowCategory && (
                             <ul>
@@ -158,8 +160,8 @@ const Header = () => {
                        <div className="hero_search">
                            <div className="hero__search_form">
                                <form action="">
-                                   <input type="text" placeholder="Ban dang can gi? "/>
-                                   <button className="" type="submit">Tim kiem</button>
+                                   <input type="text" placeholder="Bạn đang cần gì ? "/>
+                                   <button className="" type="submit">Tìm kiếm</button>
                                </form>
                            </div>
                            <div className="hero__search_phone">
@@ -168,7 +170,7 @@ const Header = () => {
                                </div>
                                <div className="hero__search_phone_text">
                                    <p>0123.456.789</p>
-                                   <span>Ho tro 24/7</span>
+                                   <span>Hỗ trợ 24/7</span>
                                </div>
                            </div>
                        </div>
