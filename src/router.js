@@ -3,7 +3,7 @@ import HomePage from "./pages/homePage";
 import {Route, Routes} from "react-router-dom";
 import MasterLayout from "./pages/theme/masterLayout";
 import Profile from "./pages/Profile";
-
+import ShoppingCart from "./pages/shoppingCart";
 function RenderRouter() {
     const pageRouter = [
         {
@@ -14,6 +14,13 @@ function RenderRouter() {
             path: ROUTERS.pages.profile,
             component: <Profile />,
         },
+        {
+            path: ROUTERS.pages.profile,
+            component: <ShoppingCart />,
+        },
+
+
+
 
     ]
     return (
@@ -25,6 +32,7 @@ function RenderRouter() {
                     ))
                 }
             </Routes>
+
         </MasterLayout>
     );
 }
