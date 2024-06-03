@@ -3,6 +3,9 @@ import HomePage from "./pages/homePage";
 import {Route, Routes} from "react-router-dom";
 import MasterLayout from "./pages/theme/masterLayout";
 import Profile from "./pages/Profile";
+import ProductPage from "./pages/productPage";
+import ShoppingCart from "./pages/shoppingCart";
+import ProductDetail from "./component/ProductDetail";
 
 function RenderRouter() {
     const pageRouter = [
@@ -13,6 +16,18 @@ function RenderRouter() {
         {
             path: ROUTERS.pages.profile,
             component: <Profile />,
+        },
+        {
+            path: ROUTERS.pages.PRODUCTS,
+            component: <ProductPage />,
+        },
+        {
+            path: ROUTERS.pages.DETAIL,
+            component: <ProductDetail />,
+        },
+        {
+            path: ROUTERS.pages.CART,
+            component: <ShoppingCart />,
         },
 
     ]
