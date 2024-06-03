@@ -192,7 +192,8 @@
         text-decoration: none;
         background-color: transparent;
         font-size: 16px;
-        color: map.get($theme-color,"bold-text");
+       // color: map.get($theme-color,"bold-text");
+        color: red;
         line-height: 39px;
         display: block;
         padding-left: 40px;
@@ -204,11 +205,71 @@
           color: map.get($theme-color,"main");
         }
       }
-
+    }
+    &.hidden {
+      opacity: 0;
     }
   }
 }
 .heros__search_container {
+
+
+  .hero__search_slider {
+    margin: 25px 0 0 15px;
+    position: relative;
+
+    .slides {
+      display: flex;
+      height: 400px;
+      transition: transform 0.5s ease-in-out;
+      transform: translateX(0);
+
+      .slide {
+        min-width: 100%;
+        transition: opacity 0.5s ease-in-out;
+        opacity: 0;
+        display: none;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .slide.active {
+        opacity: 1;
+        display: flex;
+
+      }
+      .slide img {
+        max-width: 100%;
+        max-height: 100%;
+        width: 860px;
+        height: 400px;
+        display: block;
+        margin: auto;
+      }
+    }
+    button.prev,
+    button.next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      opacity: 0.2;
+    }
+
+    button.prev {
+      left: 0px;
+    }
+
+    button.next {
+      right: 0px;
+    }
+  }
+
+
 
   .hero__search_form {
     padding-left: 15px;

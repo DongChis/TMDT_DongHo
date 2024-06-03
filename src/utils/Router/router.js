@@ -1,8 +1,10 @@
 export const ROUTERS = {
     pages: {
-        home: "",
+        home: "/",
         profile: "/thong-tin-ca-nhan",
-        product: "/san-pham"
+        PRODUCTS: "/san-pham/?",
+        CART : "/gio-hang",
+        DETAIL: "/product/:id"
 
     },
 }

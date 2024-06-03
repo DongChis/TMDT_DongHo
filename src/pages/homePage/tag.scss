@@ -15,6 +15,28 @@ $price-color: #e74c3c;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-width: 300px;
   text-align: center;
+  display: inline-block;
+
+  .btn-view,
+  .btn-add-to-cart {
+    margin-bottom: 15px;
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn-view {
+    background-color: #007bff;
+    color: #fff;
+    margin-right: 5px;
+  }
+
+  .btn-add-to-cart {
+    background-color: #28a745;
+    color: #fff;
+  }
 }
 
 .product-image {
