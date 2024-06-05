@@ -1,0 +1,88 @@
+@use "sass:map";
+@import "src/style/pages/theme";
+
+.container {
+  .section-title{
+    margin-top: 50px;
+    text-align: center;
+    h2{
+      margin-bottom: 40px;
+      position: relative;
+
+    }
+
+    h2:after{
+      position: absolute;
+      left: 0;
+      bottom: -15px;
+      right: 0;
+      height: 4px;
+      width: 100px;
+      background: map.get($theme-color,"main") ;
+      content: "";
+      margin: 0 auto;
+
+    }
+  }
+    .slider-content {
+    .slider-content-items {
+      height: 350px;
+      position: relative;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: top center;
+      left: 39%;
+
+      img {
+        background-color: #c71313;
+        margin-top: 30px;
+        height: 250px;
+
+
+      }
+
+      p {
+        position: absolute;
+
+        bottom: 0;
+        text-align: center;
+        font-size: 18px;
+        color: map.get($theme-color, "normal-text");
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        padding: 10px 0px 10px;
+        width: 270px;
+        cursor: pointer;
+
+        &:hover {
+          background: rgb(237 237 237);
+        }
+
+      }
+    }
+  }
+  .react-tabs{
+    ul{
+      display: flex;
+      justify-content: center ;
+      margin-bottom: 50px;
+
+    }
+    li{
+      list-style: none;
+      font-size: 18px;
+      color: map.get($theme-color,"normal-text");
+      display: inline-block;
+      margin-right: 25px;
+      position: relative;
+      cursor: pointer;
+    }
+  }
+}
+
+
+
+
+
+
