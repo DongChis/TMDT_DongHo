@@ -1,19 +1,17 @@
-
-import React, {memo, useState} from 'react';
+import React, { memo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./style.scss";
 import item1Img from "assets/image/slider3.avif";
 import BreadCrumb from "../theme/breadCrum";
 
-
-
 const initialCartItems = [
     { id: 1, img: item1Img, name: "Sản phẩm 1", price: 100000, quantity: 1 },
-
-
 ];
 
 const ShoppingCart = () => {
     const [cartItems, setCartItems] = useState(initialCartItems);
+    const [isEmptyCart, setIsEmptyCart] = useState(false);
+    const navigate = useNavigate();
 
     const handleQuantityChange = (id, delta) => {
         setCartItems(prevItems =>
@@ -25,13 +23,20 @@ const ShoppingCart = () => {
         );
     };
 
-
     const handleRemoveItem = id => {
         setCartItems(prevItems => prevItems.filter(item => item.id !== id));
     };
 
     const calculateTotalPrice = () => {
         return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    };
+
+    const handleCheckout = () => {
+        if (cartItems.length === 0) {
+            setIsEmptyCart(true); // Set isEmptyCart về true khi cart trôống
+        } else {
+            navigate('/checkout');
+        }
     };
 
     return (
@@ -59,10 +64,13 @@ const ShoppingCart = () => {
                 <div className="cart-total">
                     <h3>Tổng Cộng: {calculateTotalPrice().toLocaleString()} VND</h3>
                 </div>
+                {isEmptyCart && <p className="empty-cart-message">Giỏ hàng của bạn đang trống.</p>}
+                <button className="checkout-button" onClick={handleCheckout}>
+                    Thanh Toán
+                </button>
             </div>
         </>
     );
-
 };
 
 export default memo(ShoppingCart);
