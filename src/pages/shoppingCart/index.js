@@ -1,11 +1,19 @@
+
 import React, { memo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+
 import "./style.scss";
 import item1Img from "assets/image/slider3.avif";
+
 import BreadCrumb from "../theme/breadCrum";
+
 
 const initialCartItems = [
     { id: 1, img: item1Img, name: "Sản phẩm 1", price: 100000, quantity: 1 },
+
+
+
 ];
 
 const ShoppingCart = () => {
@@ -17,7 +25,10 @@ const ShoppingCart = () => {
         setCartItems(prevItems =>
             prevItems.map(item =>
                 item.id === id
+
                     ? { ...item, quantity: Math.max(1, item.quantity + delta) }
+
+                  
                     : item
             )
         );
@@ -43,7 +54,7 @@ const ShoppingCart = () => {
         <>
             <BreadCrumb name="Giỏ hàng"/>
             <div className="shopping-cart">
-                <h2>Giỏ Hàng</h2>
+                {/*<h2>Giỏ Hàng</h2>*/}
                 <div className="cart-items">
                     {cartItems.map(item => (
                         <div key={item.id} className="cart-item">
@@ -70,6 +81,7 @@ const ShoppingCart = () => {
                 </button>
             </div>
         </>
+
     );
 };
 

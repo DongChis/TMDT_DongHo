@@ -61,3 +61,39 @@ $price-color: #e74c3c;
   color: $price-color;
   margin: 10px 0 20px;
 }
+
+.product-detail-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.product-detail-image {
+  flex: 0 0 auto;
+  margin-right: 50px;
+}
+
+.product-detail-info {
+  flex: 1 1 auto;
+  max-width: 400px;
+}
+
+.product-detail-name {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.product-detail-description {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.product-detail-price {
+  font-size: 20px;
+  font-weight: bold;
+  color: #f00; /* Red color for price */
+}

@@ -4,6 +4,8 @@ export const ROUTERS = {
         profile: "/thong-tin-ca-nhan",
         PRODUCTS: "/san-pham/?",
         CART : "/gio-hang",
-        DETAIL: "/product/:id"
+        DETAIL: "/product/:id",
+        CONTACT: "/contact",
+        REVIEW: "/review"
     },
 }

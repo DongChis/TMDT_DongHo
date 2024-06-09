@@ -18,11 +18,11 @@ const Header = () => {
         },
         {
             name: "Cửa hàng",
-            path: "",
+            path: ROUTERS.pages.profile,
         },
         {
             name: "Sản phẩm",
-            path: "",
+            path: ROUTERS.pages.PRODUCTS,
             //isShowSubmenu: false,
             child: [
                 {
@@ -45,17 +45,14 @@ const Header = () => {
         },
         {
             name: "Bài viết",
-            path: "",
+            path: ROUTERS.pages.REVIEW,
         },
         {
             name: "Liên hệ",
-            path: "",
+            path: ROUTERS.pages.CONTACT,
         }
     ]);
 
-    // const useEffect(() => {
-
-    // },[location]);
 
     useEffect(() => {
             const isHome = location.pathname.length <= 1;
@@ -63,8 +60,8 @@ const Header = () => {
             setShowCategory(isHome);
     },[location]);
 
-
     const [activeIndex, setActiveIndex] = useState(0);
+
 
     const slides = [
         "https://seikowatches.co.in/cdn/shop/files/5-Sports_banner-Desktop_SRPK87K1_SRPK89K1_SRPK91K1_2049-x-1024_1024x1024.jpg?v=1712829089",
@@ -138,7 +135,7 @@ const Header = () => {
                         <div className="header__menu">
                             <ul>
                                 {menus?.map((menus, menuKey) => (
-                                    <li key={menuKey} className={menuKey === 0 ? "active" : ""}>
+                                    <li key={menuKey} className={menuKey ===  0 ? "active" : ""}>
                                         <Link to={menus?.path}>{menus?.name}</Link>
                                         {
                                             menus.child && (
