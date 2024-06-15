@@ -5,8 +5,11 @@ import MasterLayout from "./pages/theme/masterLayout";
 import Profile from "./pages/Profile";
 import ProductPage from "./pages/productPage";
 import ShoppingCart from "./pages/shoppingCart";
-import ProductDetail from "./component/ProductDetail";
 import Checkout from "./pages/CheckOut";
+import ProductDetail, {loadProduct} from "./component/ProductDetail";
+import ContactPage from "./pages/contactPage";
+import ReviewPage from "./pages/reviewPage";
+
 
 function RenderRouter() {
     const pageRouter = [
@@ -25,28 +28,39 @@ function RenderRouter() {
         {
             path: ROUTERS.pages.DETAIL,
             component: <ProductDetail />,
+            loader: loadProduct,
         },
         {
             path: ROUTERS.pages.CART,
             component: <ShoppingCart />,
         },
         {
+
             path: ROUTERS.pages.Checkout,
-            component: <Checkout />,
+            component: <Checkout/>,
+        },
+        {
+
+            path: ROUTERS.pages.REVIEW,
+            component: <ReviewPage />,
+        },
+        {
+            path: ROUTERS.pages.CONTACT,
+            component: <ContactPage />,
+
         },
 
     ]
     return (
-        <MasterLayout>
-            <Routes>
-                {
-                    pageRouter.map((item,key) => (
-                        <Route key={key} path={item.path} element={item.component} />
-                    ))
-                }
-            </Routes>
-
-        </MasterLayout>
+            <MasterLayout>
+                <Routes>
+                    {
+                        pageRouter.map((item,key) => (
+                            <Route key={key} path={item.path} element={item.component} />
+                        ))
+                    }
+                </Routes>
+            </MasterLayout>
     );
 }
 const RouterCustom = () => {
