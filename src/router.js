@@ -6,6 +6,7 @@ import Profile from "./pages/Profile";
 import ProductPage from "./pages/productPage";
 import ShoppingCart from "./pages/shoppingCart";
 import ProductDetail from "./component/ProductDetail";
+import Checkout from "./pages/CheckOut";
 
 function RenderRouter() {
     const pageRouter = [
@@ -28,6 +29,10 @@ function RenderRouter() {
         {
             path: ROUTERS.pages.CART,
             component: <ShoppingCart />,
+        },
+        {
+            path: ROUTERS.pages.Checkout,
+            component: <Checkout />,
         },
 
     ]

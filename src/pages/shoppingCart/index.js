@@ -33,9 +33,9 @@ const ShoppingCart = () => {
 
     const handleCheckout = () => {
         if (cartItems.length === 0) {
-            setIsEmptyCart(true); // Set isEmptyCart về true khi cart trôống
+            setIsEmptyCart(true);
         } else {
-            navigate('/checkout');
+            navigate('/thanh-toan', { state: { cartItems } });
         }
     };
 
