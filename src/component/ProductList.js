@@ -1,41 +1,38 @@
-import React, { useState, useEffect } from 'react';
+// src/pages/ProductPage.js
+
+import React, { useContext, useEffect, useState } from 'react';
 import dataAll from "../data/dataAll";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { CartContext } from './CartContext';
 
-const  ProductList = () => {
+const ProductPage = () => {
     const [products, setProducts] = useState([]);
+    const { handleAddToCart, alertMessage } = useContext(CartContext);
     const navigate = useNavigate();
-
-    const handleView = (product) => {
-       navigate(`/product/${product.id}`);
-    };
-
-    const handleAddToCart = (product) => {
-        console.log("Thêm vào giỏ hàng:", product);
-        // Thêm logic xử lý khi người dùng nhấn nút "Thêm vào giỏ hàng" ở đây
-    };
 
     useEffect(() => {
         setProducts(dataAll);
     }, []);
 
+    const handleView = (product) => {
+        navigate(`/product/${product.id}`);
+    };
+
     return (
-        <>
         <div className="container">
+            {alertMessage && <div className="alert">{alertMessage}</div>}
             {products.map(product => (
-                <div className="product-card">
-                    <img src={product.productImageUrl} alt="Đồng hồ sang trọng" className="product-image"/>
+                <div key={product.id} className="product-card">
+                    <img src={product.productImageUrl} alt="Đồng hồ sang trọng" className="product-image" />
                     <h2 className="product-name">{product.title}</h2>
                     <p className="product-description">{product.description}</p>
-                    <p className="product-price">{product.price}</p>
+                    <p className="product-price">{product.price.toLocaleString()} VND</p>
                     <button onClick={() => handleView(product)} className="btn-view">Xem</button>
-                    <button onClick={() => handleAddToCart(product)} className="btn-add-to-cart">Thêm
-                    </button>
+                    <button onClick={() => handleAddToCart(product)} className="btn-add-to-cart">Thêm</button>
                 </div>
             ))}
         </div>
-        </>
     );
 };
 
-export default ProductList;
+export default ProductPage;
