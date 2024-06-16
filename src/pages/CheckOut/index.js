@@ -12,6 +12,7 @@ const Checkout = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [email, setEmail] = useState('');
     const [errors, setErrors] = useState({});
+    const [onlinePaymentOption, setOnlinePaymentOption] = useState('');
     const navigate = useNavigate();
 
     const calculateTotalPrice = () => {
@@ -20,10 +21,15 @@ const Checkout = () => {
 
     const handlePaymentMethodChange = (event) => {
         setPaymentMethod(event.target.value);
+        setOnlinePaymentOption(''); // Reset online payment option when payment method changes
     };
 
     const handleShippingMethodChange = (event) => {
         setShippingMethod(event.target.value);
+    };
+
+    const handleOnlinePaymentOptionChange = (event) => {
+        setOnlinePaymentOption(event.target.value);
     };
 
     const validateForm = () => {
@@ -42,10 +48,21 @@ const Checkout = () => {
             if (paymentMethod === 'cod') {
                 alert("Đơn hàng của bạn đã được đặt. Bạn sẽ thanh toán khi nhận hàng.");
             } else {
-                alert("Bạn sẽ được chuyển hướng tới trang thanh toán online.");
+                if (onlinePaymentOption === 'bank') {
+                    alert("Bạn đã chọn thanh toán qua ngân hàng.");
+                } else if (onlinePaymentOption === 'momo') {
+                    alert("Bạn đã chọn thanh toán qua MoMo.");
+                }
+                alert("Bạn sẽ nhận được hóa đơn qua email khi thanh toán thành công.");
             }
-            navigate('/order-confirmation');
+            navigate('/');
         }
+    };
+
+    // Clear error messages when user starts typing
+    const handleInputChange = (setter, field) => (event) => {
+        setter(event.target.value);
+        setErrors((prevErrors) => ({ ...prevErrors, [field]: '' }));
     };
 
     return (
@@ -84,7 +101,7 @@ const Checkout = () => {
                                 type="text"
                                 id="shippingAddress"
                                 value={shippingAddress}
-                                onChange={(e) => setShippingAddress(e.target.value)}
+                                onChange={handleInputChange(setShippingAddress,'shippingAddress')}
                             />
                             {errors.shippingAddress && <p className="error">{errors.shippingAddress}</p>}
                         </div>
@@ -98,7 +115,7 @@ const Checkout = () => {
                             type="text"
                             id="phoneNumber"
                             value={phoneNumber}
-                            onChange={(e) => setPhoneNumber(e.target.value)}
+                            onChange={handleInputChange(setPhoneNumber, 'phoneNumber')}
                         />
                         {errors.phoneNumber && <p className="error">{errors.phoneNumber}</p>}
                     </div>
@@ -108,7 +125,7 @@ const Checkout = () => {
                             type="email"
                             id="email"
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={handleInputChange(setEmail, 'email')}
                         />
                         {errors.email && <p className="error">{errors.email}</p>}
                     </div>
@@ -120,6 +137,31 @@ const Checkout = () => {
                         <option value="online">Thanh toán online</option>
                     </select>
                 </div>
+                {paymentMethod === 'online' && (
+                    <div className="online-payment-options">
+                        <h3>Chọn phương thức thanh toán online:</h3>
+                        <select value={onlinePaymentOption} onChange={handleOnlinePaymentOptionChange}>
+                            <option value="">-- Chọn phương thức thanh toán --</option>
+                            <option value="bank">Ngân hàng</option>
+                            <option value="momo">MoMo</option>
+                        </select>
+                        {onlinePaymentOption === 'bank' && (
+                            <div className="bank-details">
+                                <img src="assets/image/bidv-logo.png" alt="BIDV Logo"/>
+                                <p>Tên ngân hàng: BIDV</p>
+                                <p>Số tài khoản: 000000001</p>
+                                <p>Tên tài khoản: Nguyễn Khang</p>
+                            </div>
+                        )}
+                        {onlinePaymentOption === 'momo' && (
+                            <div className="momo-details">
+                                <img src="assets/image/momo-logo.png" alt="MoMo Logo"/>
+                                <p>Số điện thoại: 0908070605</p>
+                                <p>Tên tài khoản: Nguyễn Khang</p>
+                            </div>
+                        )}
+                    </div>
+                )}
                 <button className="checkout-button" onClick={handlePlaceOrder}>Đặt Hàng</button>
             </div>
         </>

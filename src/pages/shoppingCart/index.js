@@ -11,9 +11,6 @@ import BreadCrumb from "../theme/breadCrum";
 
 const initialCartItems = [
     { id: 1, img: item1Img, name: "Sản phẩm 1", price: 100000, quantity: 1 },
-
-
-
 ];
 
 const ShoppingCart = () => {
