@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate,useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import "./style.scss";
 import BreadCrumb from "../theme/breadCrum";
 
@@ -50,13 +50,13 @@ const Checkout = () => {
 
     return (
         <>
-            <BreadCrumb name="Thanh Toán"/>
+            <BreadCrumb name="Thanh Toán" />
             <div className="checkout-page">
                 <h2>Thông Tin Thanh Toán</h2>
                 <div className="cart-items">
                     {cartItems.map(item => (
                         <div key={item.id} className="cart-item">
-                            <img src={item.img} alt={item.name}/>
+                            <img src={item.img} alt={item.name} />
                             <div className="item-details">
                                 <p>{item.name}</p>
                                 <p>Giá: {item.price.toLocaleString()} VND</p>
@@ -70,28 +70,10 @@ const Checkout = () => {
                 </div>
                 <div className="shipping-method">
                     <h3>Chọn phương thức nhận hàng:</h3>
-                    <div>
-                        <input
-                            type="radio"
-                            id="home"
-                            name="shippingMethod"
-                            value="home"
-                            checked={shippingMethod === 'home'}
-                            onChange={handleShippingMethodChange}
-                        />
-                        <label htmlFor="home">Giao hàng tận nơi</label>
-                    </div>
-                    <div>
-                        <input
-                            type="radio"
-                            id="store"
-                            name="shippingMethod"
-                            value="store"
-                            checked={shippingMethod === 'store'}
-                            onChange={handleShippingMethodChange}
-                        />
-                        <label htmlFor="store">Nhận tại cửa hàng</label>
-                    </div>
+                    <select value={shippingMethod} onChange={handleShippingMethodChange}>
+                        <option value="home">Giao hàng tận nơi</option>
+                        <option value="store">Nhận tại cửa hàng</option>
+                    </select>
                 </div>
                 {shippingMethod === 'home' && (
                     <div className="shipping-info">
@@ -122,38 +104,21 @@ const Checkout = () => {
                     </div>
                     <div>
                         <label htmlFor="email">Email</label>
-                        <input type="email"
-                               id="email"
-                               value={email}
-                               onChange={(e) => setEmail(e.target.value)}
+                        <input
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                         {errors.email && <p className="error">{errors.email}</p>}
                     </div>
                 </div>
                 <div className="payment-method">
                     <h3>Chọn phương thức thanh toán:</h3>
-                    <div>
-                        <input
-                            type="radio"
-                            id="cod"
-                            name="paymentMethod"
-                            value="cod"
-                            checked={paymentMethod === 'cod'}
-                            onChange={handlePaymentMethodChange}
-                        />
-                        <label htmlFor="cod">Thanh toán khi nhận hàng (COD)</label>
-                    </div>
-                    <div>
-                        <input
-                            type="radio"
-                            id="online"
-                            name="paymentMethod"
-                            value="online"
-                            checked={paymentMethod === 'online'}
-                            onChange={handlePaymentMethodChange}
-                        />
-                        <label htmlFor="online">Thanh toán online</label>
-                    </div>
+                    <select value={paymentMethod} onChange={handlePaymentMethodChange}>
+                        <option value="cod">Thanh toán khi nhận hàng (COD)</option>
+                        <option value="online">Thanh toán online</option>
+                    </select>
                 </div>
                 <button className="checkout-button" onClick={handlePlaceOrder}>Đặt Hàng</button>
             </div>

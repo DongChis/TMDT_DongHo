@@ -75,20 +75,15 @@
       color: #333;
     }
 
+    select,
     input[type="text"],
-    input[type="email"],
-    input[type="radio"] {
+    input[type="email"] {
       width: calc(100% - 20px);
       padding: 10px;
       margin-bottom: 10px;
       border: 1px solid #ddd;
       border-radius: 4px;
       box-sizing: border-box;
-    }
-
-    input[type="radio"] {
-      width: auto;
-      margin-right: 10px;
     }
 
     .error {
