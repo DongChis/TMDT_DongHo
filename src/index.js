@@ -4,13 +4,16 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom'
 import RouterCustom from "./router";
 import './style/style.scss';
+import {CartProvider} from "./component/CartContext";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
             <BrowserRouter>
-                <RouterCustom>
-                </RouterCustom>
+                <CartProvider>
+                    <RouterCustom>
+                    </RouterCustom>
+                </CartProvider>
             </BrowserRouter>
 );
 

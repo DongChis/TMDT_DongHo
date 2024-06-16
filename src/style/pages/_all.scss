@@ -50,6 +50,27 @@ body {
   border: none;
 
 }
+
+/* src/styles/alert.css */
+
+.alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  animation: fadeInOut 3s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; }
+  10%, 90% { opacity: 1; }
+}
+
 @include Reponsive($DESKTOP) {
   .col-xl-3 {
     flex: 0 0 25%;

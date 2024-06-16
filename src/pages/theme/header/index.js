@@ -1,4 +1,4 @@
-import React, {memo, useEffect, useState} from 'react'
+import React, {memo, useContext, useEffect, useState} from 'react'
 import "./style.scss";
 import {
     AiOutlineUser, AiOutlineTwitter, AiTwotoneStar,
@@ -6,6 +6,7 @@ import {
 } from "react-icons/ai";
 import {Link, useLocation} from "react-router-dom";
 import {ROUTERS} from "../../../utils/Router/router";
+import {CartContext,} from "../../../component/CartContext";
 
 const Header = () => {
     const location = useLocation();
@@ -17,7 +18,7 @@ const Header = () => {
             path: ROUTERS.pages.home,
         },
         {
-            name: "Cửa hàng",
+            name: "Giới thiệu",
             path: ROUTERS.pages.profile,
         },
         {
@@ -88,6 +89,7 @@ const Header = () => {
         "san pham 3",
         "san pham 4",
     ];
+    const { cartItems } = useContext(CartContext);
     return (
         <>
             <div className="header__top">
@@ -160,7 +162,7 @@ const Header = () => {
                             <ul>
                                 <li>
                                     <Link to={ROUTERS.pages.CART}><AiOutlineShoppingCart/>
-                                        <span>0</span>
+                                        <span>{cartItems.length}</span>
                                     </Link>
                                 </li>
                             </ul>

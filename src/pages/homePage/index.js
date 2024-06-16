@@ -2,7 +2,7 @@ import React, {memo, useEffect, useState} from 'react'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import "./style.scss"
 
@@ -18,7 +18,6 @@ import mat4Img from "assets/image/slider4.avif";
 import mat5Img from "assets/image/slider5.avif";
 
 
-
 const HomePage = () => {
     var settings = {
         dots: true,
@@ -28,43 +27,47 @@ const HomePage = () => {
         speed: 500,
     };
     const sliderItem = [
-        {bgImg: mat1Img,
+        {
+            bgImg: mat1Img,
             name: "Đồng hồ 1",
         },
-        {bgImg: mat2Img,
+        {
+            bgImg: mat2Img,
             name: "Đồng hồ 2",
         },
-        {bgImg: mat3Img,
+        {
+            bgImg: mat3Img,
             name: "Đồng hồ 3",
         },
-        {bgImg: mat4Img,
+        {
+            bgImg: mat4Img,
             name: "Đồng hồ 4",
         },
-        {bgImg: mat5Img,
+        {
+            bgImg: mat5Img,
             name: "Đồng hồ 5",
         },
 
     ];
 
-
-
     const renderSellProducts = (data) => {
         const tabList = [];
-        const  tabPanels =[];
-        Object.keys(data).forEach((key,index) => {
+        const tabPanels = [];
+        Object.keys(data).forEach((key, index) => {
             tabList.push(<Tab key={index}> {data[key].title}</Tab>);
-            const  tabPanel = [];
-            data[key].products.forEach((item,j)=>{
-                    tabPanel.push(
-                        <>
-                            <div className="product-card">
-                                <img src={item.productImageUrl} alt="Đồng hồ sang trọng" className="product-image"/>
-                                <h2 className="product-name">{item.title}</h2>
-                                <p className="product-description">{item.description}</p>
-                                <p className="product-price">{item.price}</p>
-                            </div>
-                        </>
-                    );
+            const tabPanel = [];
+            data[key].products.forEach((item, j) => {
+                tabPanel.push(
+                    <>
+                        <div className="product-card">
+                            <img src={item.productImageUrl} alt="Đồng hồ sang trọng" className="product-image"/>
+                            <h2 className="product-name">{item.title}</h2>
+                            <p className="product-description">{item.description}</p>
+                            <p className="product-price">{item.price}</p>
+                        </div>
+
+                    </>
+                );
             });
             tabPanels.push(tabPanel);
         });
