@@ -4,6 +4,7 @@ export const ROUTERS = {
         profile: "/gioi-thieu",
         PRODUCTS: "/san-pham/?",
         CART : "/gio-hang",
+        Checkout:"thanh-toan",
         DETAIL: "/product/:id",
         CONTACT: "/contact",
         REVIEW: "/review"

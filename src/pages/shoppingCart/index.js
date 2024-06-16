@@ -95,9 +95,13 @@ const ShoppingCart = () => {
 
     const handleCheckout = () => {
         if (cartItems.length === 0) {
+
+            setIsEmptyCart(true);
+
             alert('Giỏ hàng của bạn đang trống.');
+
         } else {
-            navigate('/checkout');
+            navigate('/thanh-toan', { state: { cartItems } });
         }
     };
 
