@@ -6,7 +6,7 @@ import Profile from "./pages/Profile";
 import ProductPage from "./pages/productPage";
 import ShoppingCart from "./pages/shoppingCart";
 import Checkout from "./pages/CheckOut";
-import ProductDetail, {loadProduct} from "./component/ProductDetail";
+import ProductDetail, {loadProduct} from "./pages/ProductDetail";
 import ContactPage from "./pages/contactPage";
 import ReviewPage from "./pages/reviewPage";
 

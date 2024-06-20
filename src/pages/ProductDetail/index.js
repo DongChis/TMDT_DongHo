@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import productAll from "../data/dataAll";
-import BreadCrumb from "../pages/theme/breadCrum";
+import productAll from "../../data/dataAll";
+import BreadCrumb from "../../pages/theme/breadCrum";
+import "./style.scss"
 
 async function getProduct(id) {
     return productAll.find((product) => product.id == id);
@@ -15,7 +16,7 @@ export async function loadProduct({ params }) {
 
 const ProductDetail = () => {
     const { id } = useParams(); // Assuming your route parameter is named 'id'
-    const [product, setProduct] = useState(null);
+    const [product, setProduct] = useState( null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -25,6 +26,7 @@ const ProductDetail = () => {
                 const productData = await getProduct(id);
                 setProduct(productData);
                 setLoading(false);
+
             } catch (error) {
                 console.error("Error fetching product:", error);
                 setError(error.message);
@@ -53,20 +55,28 @@ const ProductDetail = () => {
     }
 
     return (
-        <>
-        <BreadCrumb name="Chi tiết sản phẩm"></BreadCrumb>
-        <div className="container">
-            <div className="product-detail-container">
-                <div className="product-detail-image">
-                    <img src={product.productImageUrl} alt="Product Image"/>
+        <><BreadCrumb name="Chi tiết sản phẩm"></BreadCrumb>
+            <div className="container">
+                <div className="product-detail-container">
+                    <div className="product-detail-image">
+                        <img height="400px" width="400px" src={product.productImageUrl} alt="Product Image"/>
+                    </div>
+                    <div>
+                        <div className="product-detail-info">
+                            <h1 className="product-detail-name">{product.title}</h1>
+                            <p className="product-detail-description">{product.description}</p>
+                            <p className="product-detail-price">{product.price}</p>
+
+                        </div>
+                        <div className="button">
+                            <button className="add-cart">Thêm vào giõ hàng</button>
+                            <br/>
+                            <button className="product-buy">Mua</button>
+                        </div>
+                    </div>
                 </div>
-                <div className="product-detail-info">
-                    <h1 className="product-detail-name">{product.title}</h1>
-                    <p className="product-detail-description">{product.description}</p>
-                    <p className="product-detail-price">{product.price}</p>
-                </div>
+
             </div>
-        </div>
         </>
     );
 };
