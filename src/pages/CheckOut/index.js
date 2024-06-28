@@ -12,7 +12,7 @@ const Checkout = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [email, setEmail] = useState('');
     const [errors, setErrors] = useState({});
-    const [onlinePaymentOption, setOnlinePaymentOption] = useState('');
+    const [onlinePaymentOption, setOnlinePaymentOption] = useState('bank');
     const navigate = useNavigate();
 
     const calculateTotalPrice = () => {
@@ -21,7 +21,12 @@ const Checkout = () => {
 
     const handlePaymentMethodChange = (event) => {
         setPaymentMethod(event.target.value);
-        setOnlinePaymentOption(''); // Reset online payment option when payment method changes
+        // Set default online payment option to 'bank' if online payment is selected
+        if (event.target.value === 'online') {
+            setOnlinePaymentOption('bank');
+        } else {
+            setOnlinePaymentOption('');
+        }
     };
 
     const handleShippingMethodChange = (event) => {
@@ -39,6 +44,9 @@ const Checkout = () => {
         }
         if (!phoneNumber) newErrors.phoneNumber = 'Số điện thoại là bắt buộc.';
         if (!email) newErrors.email = 'Email là bắt buộc.';
+        if (paymentMethod === 'online' && !onlinePaymentOption) {
+            newErrors.onlinePaymentOption = 'Bạn chưa chọn phương thức thanh toán online.';
+        }
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
@@ -48,11 +56,6 @@ const Checkout = () => {
             if (paymentMethod === 'cod') {
                 alert("Đơn hàng của bạn đã được đặt. Bạn sẽ thanh toán khi nhận hàng.");
             } else {
-                if (onlinePaymentOption === 'bank') {
-                    alert("Bạn đã chọn thanh toán qua ngân hàng.");
-                } else if (onlinePaymentOption === 'momo') {
-                    alert("Bạn đã chọn thanh toán qua MoMo.");
-                }
                 alert("Bạn sẽ nhận được hóa đơn qua email khi thanh toán thành công.");
             }
             navigate('/');
@@ -101,7 +104,7 @@ const Checkout = () => {
                                 type="text"
                                 id="shippingAddress"
                                 value={shippingAddress}
-                                onChange={handleInputChange(setShippingAddress,'shippingAddress')}
+                                onChange={handleInputChange(setShippingAddress, 'shippingAddress')}
                             />
                             {errors.shippingAddress && <p className="error">{errors.shippingAddress}</p>}
                         </div>
@@ -141,13 +144,13 @@ const Checkout = () => {
                     <div className="online-payment-options">
                         <h3>Chọn phương thức thanh toán online:</h3>
                         <select value={onlinePaymentOption} onChange={handleOnlinePaymentOptionChange}>
-                            <option value="">-- Chọn phương thức thanh toán --</option>
                             <option value="bank">Ngân hàng</option>
                             <option value="momo">MoMo</option>
                         </select>
+                        {errors.onlinePaymentOption && <p className="error">{errors.onlinePaymentOption}</p>}
                         {onlinePaymentOption === 'bank' && (
                             <div className="bank-details">
-                                <img src="assets/image/bidv-logo.png" alt="BIDV Logo"/>
+                                <img src="assets/image/bidv-logo.png" />
                                 <p>Tên ngân hàng: BIDV</p>
                                 <p>Số tài khoản: 000000001</p>
                                 <p>Tên tài khoản: Nguyễn Khang</p>
@@ -155,7 +158,7 @@ const Checkout = () => {
                         )}
                         {onlinePaymentOption === 'momo' && (
                             <div className="momo-details">
-                                <img src="assets/image/momo-logo.png" alt="MoMo Logo"/>
+                                <img src="assets/image/momo-logo.png" />
                                 <p>Số điện thoại: 0908070605</p>
                                 <p>Tên tài khoản: Nguyễn Khang</p>
                             </div>
