@@ -1,141 +1,162 @@
 .checkout-page {
-  width: 100%;
-  max-width: 800px;
+  width: 80%;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
   h2 {
     text-align: center;
-    margin-bottom: 20px;
-    font-size: 24px;
     color: #333;
   }
 
-  .cart-items {
+  .checkout-items {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    margin-bottom: 20px;
 
-    .cart-item {
+    .checkout-item {
       display: flex;
       align-items: center;
+      margin-bottom: 10px;
       padding: 10px;
       background-color: #fff;
-      border: 1px solid #ddd;
       border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 
       img {
-        width: 80px;
-        height: 80px;
+        width: 100px;
+        height: 100px;
         object-fit: cover;
         border-radius: 8px;
-        margin-right: 20px;
+        margin-right: 15px;
       }
 
       .item-details {
-        flex-grow: 1;
-
         p {
-          margin: 0 0 10px;
-          color: #333;
+          margin: 0;
+          color: #555;
         }
       }
     }
-  }
 
-  .cart-total {
-    text-align: right;
-    margin-top: 20px;
-
-    h3 {
-      font-size: 20px;
-      color: #333;
+    .item-total {
+      text-align: right;
+      color: #555;
+      font-weight: bold;
     }
   }
 
-  .shipping-method,
-  .shipping-info,
-  .contact-info,
+  .empty-cart-message {
+    text-align: center;
+    color: #999;
+  }
+
+  .checkout-total {
+    text-align: right;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .delivery-method,
   .payment-method {
-    margin-top: 20px;
+    margin-bottom: 20px;
 
     h3 {
-      font-size: 18px;
       color: #333;
-      margin-bottom: 10px;
-      font-weight: normal;
     }
 
     label {
       display: block;
-      margin-bottom: 5px;
-      color: #333;
-      font-size: 14px;
-      font-weight: normal;
-    }
-
-    select,
-    input[type="text"],
-    input[type="email"] {
-      width: calc(100% - 20px);
-      padding: 10px;
       margin-bottom: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
+      color: #555;
 
-    .error {
-      color: #ff6b6b;
-      font-size: 14px;
+      input {
+        margin-right: 10px;
+      }
     }
   }
 
-  .online-payment-options {
-    .bank-details,
-    .momo-details {
-      text-align: center;
+  .delivery-info,
+  .store-info {
+    margin-bottom: 20px;
+
+    h3 {
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: #555;
+
+      input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+    }
+
+    .store-details {
       margin-top: 10px;
 
       p {
         margin: 5px 0;
-        color: #333;
+        color: #777;
       }
+    }
+  }
 
-      img {
-        width: auto;
-        height: auto;
-        margin-bottom: 10px;
+  .online-payment-options {
+    margin-bottom: 20px;
+
+    .online-option {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      color: #555;
+
+      input {
+        margin-right: 10px;
       }
+    }
+  }
+
+  .bank-details,
+  .momo-details {
+    text-align: center;
+    margin-bottom: 20px;
+
+    img {
+      width: 100px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin: 5px 0;
+      color: #777;
     }
   }
 
   .checkout-button {
     display: block;
     width: 100%;
-    padding: 15px 0;
-    margin-top: 20px;
-    background-color: #003366;
-    color: #ffffff;
-    border: none;
-    border-radius: 4px;
-    font-size: 18px;
+    padding: 15px;
+    background-color: rgb(19, 19, 119);
+    color: #fff;
     text-align: center;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
     cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.3s;
 
     &:hover {
-      background-color: #002f5c;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-
-    &:active {
-      background-color: #002847;
-      box-shadow: none;
+      background-color: darken(rgb(19, 19, 119), 10%);
     }
   }
 }
