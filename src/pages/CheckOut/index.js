@@ -1,171 +1,239 @@
-import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
 import "./style.scss";
 import BreadCrumb from "../theme/breadCrum";
+import bankLogo from '../../assets/image/bidv-logo.png';
+import momoLogo from '../../assets/image/momo-logo.png';
+
+import React, { useState, useContext } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import Notification from '../NotificationBox/Notification';
+import { CartContext } from '../../component/CartContext';
 
 const Checkout = () => {
     const location = useLocation();
-    const cartItems = location.state?.cartItems || [];
-    const [paymentMethod, setPaymentMethod] = useState('cod');
-    const [shippingMethod, setShippingMethod] = useState('home'); // 'home' for home delivery, 'store' for store pickup
-    const [shippingAddress, setShippingAddress] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [email, setEmail] = useState('');
-    const [errors, setErrors] = useState({});
-    const [onlinePaymentOption, setOnlinePaymentOption] = useState('');
     const navigate = useNavigate();
+    const { clearCart } = useContext(CartContext);
+    const [cartItems, setCartItems] = useState(location.state?.cartItems || []);
+
+    const [deliveryMethod, setDeliveryMethod] = useState('home');
+    const [paymentMethod, setPaymentMethod] = useState('online');
+    const [onlinePaymentMethod, setOnlinePaymentMethod] = useState('bank');
+    const [address, setAddress] = useState('');
+    const [phone, setPhone] = useState('');
+    const [email, setEmail] = useState('');
+    const [showNotification, setShowNotification] = useState(false);
 
     const calculateTotalPrice = () => {
         return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
     };
 
-    const handlePaymentMethodChange = (event) => {
-        setPaymentMethod(event.target.value);
-        setOnlinePaymentOption(''); // Reset online payment option when payment method changes
-    };
-
-    const handleShippingMethodChange = (event) => {
-        setShippingMethod(event.target.value);
-    };
-
-    const handleOnlinePaymentOptionChange = (event) => {
-        setOnlinePaymentOption(event.target.value);
-    };
-
-    const validateForm = () => {
-        const newErrors = {};
-        if (shippingMethod === 'home' && !shippingAddress) {
-            newErrors.shippingAddress = 'Địa chỉ nhận hàng là bắt buộc.';
+    const handlePayment = () => {
+        if (deliveryMethod === 'home' && (!address || !phone || !email)) {
+            alert('Vui lòng điền đầy đủ thông tin nhận hàng.');
+            return;
         }
-        if (!phoneNumber) newErrors.phoneNumber = 'Số điện thoại là bắt buộc.';
-        if (!email) newErrors.email = 'Email là bắt buộc.';
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
-    };
-
-    const handlePlaceOrder = () => {
-        if (validateForm()) {
-            if (paymentMethod === 'cod') {
-                alert("Đơn hàng của bạn đã được đặt. Bạn sẽ thanh toán khi nhận hàng.");
-            } else {
-                if (onlinePaymentOption === 'bank') {
-                    alert("Bạn đã chọn thanh toán qua ngân hàng.");
-                } else if (onlinePaymentOption === 'momo') {
-                    alert("Bạn đã chọn thanh toán qua MoMo.");
-                }
-                alert("Bạn sẽ nhận được hóa đơn qua email khi thanh toán thành công.");
-            }
-            navigate('/');
+        if (deliveryMethod === 'store' && (!phone || !email)) {
+            alert('Vui lòng điền số điện thoại và email.');
+            return;
         }
-    };
-
-    // Clear error messages when user starts typing
-    const handleInputChange = (setter, field) => (event) => {
-        setter(event.target.value);
-        setErrors((prevErrors) => ({ ...prevErrors, [field]: '' }));
+        setShowNotification(true);
+        setTimeout(() => {
+            setShowNotification(false);
+            clearCart();
+            setCartItems([]);
+            navigate('/', { state: { cartItems: [] } });
+        }, 2000);
     };
 
     return (
         <>
             <BreadCrumb name="Thanh Toán" />
             <div className="checkout-page">
-                <h2>Thông Tin Thanh Toán</h2>
-                <div className="cart-items">
+                <h2>Các Sản Phẩm</h2>
+                <div className="checkout-items">
                     {cartItems.map(item => (
-                        <div key={item.id} className="cart-item">
-                            <img src={item.img} alt={item.name} />
-                            <div className="item-details">
-                                <p>{item.name}</p>
-                                <p>Giá: {item.price.toLocaleString()} VND</p>
-                                <p>Số lượng: {item.quantity}</p>
+                        <React.Fragment key={item.id}>
+                            <div className="checkout-item">
+                                <img src={item.productImageUrl} alt={item.title} />
+                                <div className="item-details">
+                                    <p>{item.title}</p>
+                                    <p>Giá: {item.price.toLocaleString()} VND</p>
+                                    <p>Số lượng: {item.quantity}</p>
+                                </div>
                             </div>
-                        </div>
+                        </React.Fragment>
                     ))}
                 </div>
-                <div className="cart-total">
+
+                <div className="checkout-total">
                     <h3>Tổng Cộng: {calculateTotalPrice().toLocaleString()} VND</h3>
                 </div>
-                <div className="shipping-method">
-                    <h3>Chọn phương thức nhận hàng:</h3>
-                    <select value={shippingMethod} onChange={handleShippingMethodChange}>
-                        <option value="home">Giao hàng tận nơi</option>
-                        <option value="store">Nhận tại cửa hàng</option>
-                    </select>
+
+                <div className="delivery-method">
+                    <h3>Phương Thức Nhận Hàng</h3>
+                    <div className="option-group">
+                        <label>
+                            <input
+                                type="radio"
+                                value="home"
+                                checked={deliveryMethod === 'home'}
+                                onChange={() => setDeliveryMethod('home')}
+                            />
+                            Giao hàng tận nhà
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                value="store"
+                                checked={deliveryMethod === 'store'}
+                                onChange={() => setDeliveryMethod('store')}
+                            />
+                            Đến lấy tại cửa hàng
+                        </label>
+                    </div>
                 </div>
-                {shippingMethod === 'home' && (
-                    <div className="shipping-info">
-                        <h3>Thông Tin Nhận Hàng:</h3>
-                        <div>
-                            <label htmlFor="shippingAddress">Địa chỉ nhận hàng</label>
+
+                {deliveryMethod === 'home' && (
+                    <div className="delivery-info">
+                        <h3>Thông Tin Nhận Hàng</h3>
+                        <label>
+                            Địa chỉ:
                             <input
                                 type="text"
-                                id="shippingAddress"
-                                value={shippingAddress}
-                                onChange={handleInputChange(setShippingAddress,'shippingAddress')}
+                                value={address}
+                                onChange={(e) => setAddress(e.target.value)}
+                                placeholder="Nhập địa chỉ nhận hàng"
                             />
-                            {errors.shippingAddress && <p className="error">{errors.shippingAddress}</p>}
+                        </label>
+                        <label>
+                            Số điện thoại:
+                            <input
+                                type="text"
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                                placeholder="Nhập số điện thoại"
+                            />
+                        </label>
+                        <label>
+                            Email:
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Nhập email"
+                            />
+                        </label>
+                    </div>
+                )}
+
+                {deliveryMethod === 'store' && (
+                    <div className="cus-info">
+                        <h3>Thông Tin Khách Hàng</h3>
+                        <label>
+                            Số điện thoại của bạn:
+                            <input
+                                type="text"
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                                placeholder="Nhập số điện thoại"
+                            />
+                        </label>
+                        <label>
+                            Email của bạn:
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Nhập email"
+                            />
+                        </label>
+                        <h3>Thông Tin Cửa Hàng</h3>
+                        <div className="store-details">
+                            <p>Địa chỉ cửa hàng: 169 Lê Văn Chí</p>
+                            <p>Số điện thoại cửa hàng: 0123-456-789</p>
                         </div>
                     </div>
                 )}
-                <div className="contact-info">
-                    <h3>Thông Tin Liên Lạc:</h3>
-                    <div>
-                        <label htmlFor="phoneNumber">Số điện thoại</label>
-                        <input
-                            type="text"
-                            id="phoneNumber"
-                            value={phoneNumber}
-                            onChange={handleInputChange(setPhoneNumber, 'phoneNumber')}
-                        />
-                        {errors.phoneNumber && <p className="error">{errors.phoneNumber}</p>}
-                    </div>
-                    <div>
-                        <label htmlFor="email">Email</label>
-                        <input
-                            type="email"
-                            id="email"
-                            value={email}
-                            onChange={handleInputChange(setEmail, 'email')}
-                        />
-                        {errors.email && <p className="error">{errors.email}</p>}
-                    </div>
-                </div>
+
                 <div className="payment-method">
-                    <h3>Chọn phương thức thanh toán:</h3>
-                    <select value={paymentMethod} onChange={handlePaymentMethodChange}>
-                        <option value="cod">Thanh toán khi nhận hàng (COD)</option>
-                        <option value="online">Thanh toán online</option>
-                    </select>
+                    <h3>Phương Thức Thanh Toán</h3>
+                    <div className="option-group">
+                        <label>
+                            <input
+                                type="radio"
+                                value="cod"
+                                checked={paymentMethod === 'cod'}
+                                onChange={() => setPaymentMethod('cod')}
+                            />
+                            Thanh toán khi nhận hàng
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                value="online"
+                                checked={paymentMethod === 'online'}
+                                onChange={() => setPaymentMethod('online')}
+                            />
+                            Thanh toán online
+                        </label>
+                    </div>
                 </div>
+
                 {paymentMethod === 'online' && (
                     <div className="online-payment-options">
                         <h3>Chọn phương thức thanh toán online:</h3>
-                        <select value={onlinePaymentOption} onChange={handleOnlinePaymentOptionChange}>
-                            <option value="">-- Chọn phương thức thanh toán --</option>
-                            <option value="bank">Ngân hàng</option>
-                            <option value="momo">MoMo</option>
-                        </select>
-                        {onlinePaymentOption === 'bank' && (
-                            <div className="bank-details">
-                                <img src="assets/image/bidv-logo.png" alt="BIDV Logo"/>
-                                <p>Tên ngân hàng: BIDV</p>
-                                <p>Số tài khoản: 000000001</p>
-                                <p>Tên tài khoản: Nguyễn Khang</p>
-                            </div>
-                        )}
-                        {onlinePaymentOption === 'momo' && (
-                            <div className="momo-details">
-                                <img src="assets/image/momo-logo.png" alt="MoMo Logo"/>
-                                <p>Số điện thoại: 0908070605</p>
-                                <p>Tên tài khoản: Nguyễn Khang</p>
-                            </div>
-                        )}
+                        <div className="option-group">
+                            <label>
+                                <input
+                                    type="radio"
+                                    value="bank"
+                                    checked={onlinePaymentMethod === 'bank'}
+                                    onChange={() => setOnlinePaymentMethod('bank')}
+                                />
+                                Chuyển khoản ngân hàng
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    value="momo"
+                                    checked={onlinePaymentMethod === 'momo'}
+                                    onChange={() => setOnlinePaymentMethod('momo')}
+                                />
+                                Ví MoMo
+                            </label>
+                        </div>
                     </div>
                 )}
-                <button className="checkout-button" onClick={handlePlaceOrder}>Đặt Hàng</button>
+
+                {paymentMethod === 'online' && onlinePaymentMethod === 'bank' && (
+                    <div className="bank-details">
+                        <h3>Thông Tin Ngân Hàng</h3>
+                        <img src={bankLogo} alt="Bank Logo" />
+                        <p>Ngân hàng BIDV - Chi nhánh Thủ Đức</p>
+                        <p>Số tài khoản: 123456789</p>
+                        <p>Chủ tài khoản: Nguyễn Khang</p>
+                    </div>
+                )}
+
+                {paymentMethod === 'online' && onlinePaymentMethod === 'momo' && (
+                    <div className="momo-details">
+                        <h3>Thông Tin Ví MoMo</h3>
+                        <img src={momoLogo} alt="MoMo Logo" />
+                        <p>Số điện thoại: 0987654321</p>
+                        <p>Chủ tài khoản: Nguyễn Khang</p>
+                    </div>
+                )}
+
+                <button className="checkout-button" onClick={handlePayment}>
+                    Đặt Hàng
+                </button>
+
+                {showNotification && (
+                    <Notification message="Đặt hàng thành công!" />
+                )}
             </div>
         </>
     );
 };
+
 
 export default Checkout;
