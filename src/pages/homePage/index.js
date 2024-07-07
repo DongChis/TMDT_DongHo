@@ -1,14 +1,15 @@
-import React, {memo, useEffect, useState} from 'react'
+import React, {memo, useContext, useEffect, useState} from 'react'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import "./style.scss"
-
+import ProductList  from "../../component/ProductList";
 import "./tag.scss"
 import "pages/Profile/style.scss"
 import sellProducts from "../../data/ProductData";
+import { useNavigate } from 'react-router-dom';
 
 
 import mat1Img from "assets/image/slider1.jpg";
@@ -16,6 +17,7 @@ import mat2Img from "assets/image/slider2.avif";
 import mat3Img from "assets/image/slider3.avif";
 import mat4Img from "assets/image/slider4.avif";
 import mat5Img from "assets/image/slider5.avif";
+import {CartContext} from "../../component/CartContext";
 
 
 const HomePage = () => {
@@ -49,7 +51,12 @@ const HomePage = () => {
         },
 
     ];
+    const navigate = useNavigate();
+    const { handleAddToCart, alertMessage } = useContext(CartContext);
+    const handleView = (product) => {
 
+        navigate(`/product/${product.id}`);
+    };
     const renderSellProducts = (data) => {
         const tabList = [];
         const tabPanels = [];
@@ -59,11 +66,15 @@ const HomePage = () => {
             data[key].products.forEach((item, j) => {
                 tabPanel.push(
                     <>
+
                         <div className="product-card">
                             <img src={item.productImageUrl} alt="Đồng hồ sang trọng" className="product-image"/>
                             <h2 className="product-name">{item.title}</h2>
-                            <p className="product-description">{item.description}</p>
-                            <p className="product-price">{item.price}</p>
+                            <p className="product-description">{item.description} </p>
+                            <p className="product-price">{item.price.toLocaleString()} VND</p>
+                            <button onClick={() => handleView(item)} className="btn-view">Xem</button>
+
+                            <button onClick={() => handleAddToCart(item)} className="btn-add-to-cart">Thêm</button>
                         </div>
 
                     </>
@@ -75,7 +86,7 @@ const HomePage = () => {
         return (
             <Tabs>
                 <TabList>
-                    {tabList}
+                {tabList}
                 </TabList>
                 {tabPanels.map((item, key) => (
                     <TabPanel key={key}>
@@ -90,6 +101,7 @@ const HomePage = () => {
 
     return (
         <>
+
             <div className="container-slider container">
                 <div className="section-title">
                     <h2>Sản Phẩm NEW</h2>

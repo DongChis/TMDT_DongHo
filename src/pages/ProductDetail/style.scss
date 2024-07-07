@@ -1,0 +1,27 @@
+.container{
+
+
+  .product-detail-image{
+    border: 2px black;
+  }
+  .product-detail-info{
+    .product-detail-name{
+      margin-top: 0;
+      font-size:50px ;
+    }
+
+  }
+  .button {
+
+    margin-top: 20px;
+    .add-cart{
+      background-color: #ef0a0a;
+      margin-bottom: 20px;
+      width: 180px;
+    }
+    .product-buy{
+      background-color: rgba(11, 12, 119, 0.97);
+      width: 180px;
+    }
+  }
+}

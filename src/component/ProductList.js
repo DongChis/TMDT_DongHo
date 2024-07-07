@@ -4,17 +4,27 @@ import React, { useContext, useEffect, useState } from 'react';
 import dataAll from "../data/dataAll";
 import { useNavigate } from 'react-router-dom';
 import { CartContext } from './CartContext';
+import {setupListeners} from "@reduxjs/toolkit/query";
+import sellProducts from "../data/ProductData";
 
 const ProductPage = () => {
     const [products, setProducts] = useState([]);
     const { handleAddToCart, alertMessage } = useContext(CartContext);
     const navigate = useNavigate();
 
+
     useEffect(() => {
-        setProducts(dataAll);
+        setProducts(sellProducts.all.products);
+        // const fetchPosts = async()=> {
+        //    const respose = await fetch('https://fakestoreapi.com/products')
+        //     const posts = await  respose.json() ;
+        //    setProducts(posts);
+        // }
+       // fetchPosts();
     }, []);
 
     const handleView = (product) => {
+
         navigate(`/product/${product.id}`);
     };
 
