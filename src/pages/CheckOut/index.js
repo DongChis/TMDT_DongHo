@@ -1,18 +1,17 @@
-
 import "./style.scss";
 import BreadCrumb from "../theme/breadCrum";
 import bankLogo from '../../assets/image/bidv-logo.png';
 import momoLogo from '../../assets/image/momo-logo.png';
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import "./style.scss";
 import Notification from '../NotificationBox/Notification';
-
+import { CartContext } from '../../component/CartContext';
 
 const Checkout = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    const { clearCart } = useContext(CartContext);
     const [cartItems, setCartItems] = useState(location.state?.cartItems || []);
 
     const [deliveryMethod, setDeliveryMethod] = useState('home');
@@ -39,6 +38,7 @@ const Checkout = () => {
         setShowNotification(true);
         setTimeout(() => {
             setShowNotification(false);
+            clearCart();
             setCartItems([]);
             navigate('/', { state: { cartItems: [] } });
         }, 2000);
@@ -46,9 +46,9 @@ const Checkout = () => {
 
     return (
         <>
-            <BreadCrumb name="Thanh Toán"/>
+            <BreadCrumb name="Thanh Toán" />
             <div className="checkout-page">
-                <h2>Trang Thanh Toán</h2>
+                <h2>Các Sản Phẩm</h2>
                 <div className="checkout-items">
                     {cartItems.map(item => (
                         <React.Fragment key={item.id}>
@@ -63,7 +63,6 @@ const Checkout = () => {
                         </React.Fragment>
                     ))}
                 </div>
-                {cartItems.length === 0 && <p className="empty-cart-message">Giỏ hàng của bạn đang trống.</p>}
 
                 <div className="checkout-total">
                     <h3>Tổng Cộng: {calculateTotalPrice().toLocaleString()} VND</h3>
@@ -71,24 +70,26 @@ const Checkout = () => {
 
                 <div className="delivery-method">
                     <h3>Phương Thức Nhận Hàng</h3>
-                    <label>
-                        <input
-                            type="radio"
-                            value="home"
-                            checked={deliveryMethod === 'home'}
-                            onChange={() => setDeliveryMethod('home')}
-                        />
-                        Giao hàng tận nhà
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            value="store"
-                            checked={deliveryMethod === 'store'}
-                            onChange={() => setDeliveryMethod('store')}
-                        />
-                        Đến lấy tại cửa hàng
-                    </label>
+                    <div className="option-group">
+                        <label>
+                            <input
+                                type="radio"
+                                value="home"
+                                checked={deliveryMethod === 'home'}
+                                onChange={() => setDeliveryMethod('home')}
+                            />
+                            Giao hàng tận nhà
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                value="store"
+                                checked={deliveryMethod === 'store'}
+                                onChange={() => setDeliveryMethod('store')}
+                            />
+                            Đến lấy tại cửa hàng
+                        </label>
+                    </div>
                 </div>
 
                 {deliveryMethod === 'home' && (
@@ -125,7 +126,7 @@ const Checkout = () => {
                 )}
 
                 {deliveryMethod === 'store' && (
-                    <div className="store-info">
+                    <div className="cus-info">
                         <h3>Thông Tin Khách Hàng</h3>
                         <label>
                             Số điện thoại của bạn:
@@ -145,8 +146,8 @@ const Checkout = () => {
                                 placeholder="Nhập email"
                             />
                         </label>
+                        <h3>Thông Tin Cửa Hàng</h3>
                         <div className="store-details">
-                            <h3>Thông Tin Cửa Hàng</h3>
                             <p>Địa chỉ cửa hàng: 169 Lê Văn Chí</p>
                             <p>Số điện thoại cửa hàng: 0123-456-789</p>
                         </div>
@@ -155,72 +156,84 @@ const Checkout = () => {
 
                 <div className="payment-method">
                     <h3>Phương Thức Thanh Toán</h3>
-                    <label>
-                        <input
-                            type="radio"
-                            value="online"
-                            checked={paymentMethod === 'online'}
-                            onChange={() => setPaymentMethod('online')}
-                        />
-                        Thanh toán online
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            value="cod"
-                            checked={paymentMethod === 'cod'}
-                            onChange={() => setPaymentMethod('cod')}
-                        />
-                        Thanh toán khi nhận hàng
-                    </label>
+                    <div className="option-group">
+                        <label>
+                            <input
+                                type="radio"
+                                value="cod"
+                                checked={paymentMethod === 'cod'}
+                                onChange={() => setPaymentMethod('cod')}
+                            />
+                            Thanh toán khi nhận hàng
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                value="online"
+                                checked={paymentMethod === 'online'}
+                                onChange={() => setPaymentMethod('online')}
+                            />
+                            Thanh toán online
+                        </label>
+                    </div>
                 </div>
 
                 {paymentMethod === 'online' && (
                     <div className="online-payment-options">
-                        <label className="online-option">
-                            <input
-                                type="radio"
-                                value="bank"
-                                checked={onlinePaymentMethod === 'bank'}
-                                onChange={() => setOnlinePaymentMethod('bank')}
-                            />
-                            Ngân hàng
-                        </label>
-                        <label className="online-option">
-                            <input
-                                type="radio"
-                                value="momo"
-                                checked={onlinePaymentMethod === 'momo'}
-                                onChange={() => setOnlinePaymentMethod('momo')}
-                            />
-                            Ví điện tử MoMo
-                        </label>
+                        <h3>Chọn phương thức thanh toán online:</h3>
+                        <div className="option-group">
+                            <label>
+                                <input
+                                    type="radio"
+                                    value="bank"
+                                    checked={onlinePaymentMethod === 'bank'}
+                                    onChange={() => setOnlinePaymentMethod('bank')}
+                                />
+                                Chuyển khoản ngân hàng
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    value="momo"
+                                    checked={onlinePaymentMethod === 'momo'}
+                                    onChange={() => setOnlinePaymentMethod('momo')}
+                                />
+                                Ví MoMo
+                            </label>
+                        </div>
                     </div>
                 )}
 
-                {onlinePaymentMethod === 'bank' && (
+                {paymentMethod === 'online' && onlinePaymentMethod === 'bank' && (
                     <div className="bank-details">
+                        <h3>Thông Tin Ngân Hàng</h3>
                         <img src={bankLogo} alt="Bank Logo" />
-                        <p>Số tài khoản: 192211133447</p>
-                        <p>Tên tài khoản: Cửa hàng WatchStore</p>
+                        <p>Ngân hàng BIDV - Chi nhánh Thủ Đức</p>
+                        <p>Số tài khoản: 123456789</p>
+                        <p>Chủ tài khoản: Nguyễn Khang</p>
                     </div>
                 )}
 
-                {onlinePaymentMethod === 'momo' && (
+                {paymentMethod === 'online' && onlinePaymentMethod === 'momo' && (
                     <div className="momo-details">
+                        <h3>Thông Tin Ví MoMo</h3>
                         <img src={momoLogo} alt="MoMo Logo" />
-                        <p>Số ĐT MoMo: 092131231</p>
-                        <p>Tên tài khoản: Cửa hàng WatchStore</p>
+                        <p>Số điện thoại: 0987654321</p>
+                        <p>Chủ tài khoản: Nguyễn Khang</p>
                     </div>
                 )}
 
                 <button className="checkout-button" onClick={handlePayment}>
-                    Thanh Toán Ngay
+                    Đặt Hàng
                 </button>
+
+                {showNotification && (
+                    <Notification message="Đặt hàng thành công!" />
+                )}
             </div>
-            {showNotification && <Notification message="Thanh toán thành công!" />}
         </>
     );
 };
+
 
 export default Checkout;
