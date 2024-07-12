@@ -1,18 +1,19 @@
-import React, {memo, useContext, useEffect, useState} from 'react'
+import React, {memo, useContext, useEffect, useState} from 'react';
 import "./style.scss";
 import {
     AiOutlineUser, AiOutlineTwitter, AiTwotoneStar,
     AiOutlineMail, AiTwotoneCar, AiOutlineShoppingCart, AiOutlineMenu, AiOutlinePhone, AiOutlineHeart
 } from "react-icons/ai";
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {ROUTERS} from "../../../utils/Router/router";
-import {CartContext,} from "../../../component/CartContext";
+import {CartContext} from "../../../component/CartContext";
 
 const Header = () => {
     const location = useLocation();
-    const [isHome,setIsHome] = useState(location.pathname.length <= 1);
+    const navigate = useNavigate();
+    const [isHome, setIsHome] = useState(location.pathname.length <= 1);
     const [isShowCategory, setShowCategory] = useState(isHome);
-    const [menus,setMenus] = useState([
+    const [menus, setMenus] = useState([
         {
             name: "Trang chủ",
             path: ROUTERS.pages.home,
@@ -24,7 +25,6 @@ const Header = () => {
         {
             name: "Sản phẩm",
             path: ROUTERS.pages.PRODUCTS,
-            //isShowSubmenu: false,
             child: [
                 {
                     name: "Đồng hồ 1",
@@ -54,15 +54,13 @@ const Header = () => {
         }
     ]);
 
-
     useEffect(() => {
-            const isHome = location.pathname.length <= 1;
-            setIsHome(isHome);
-            setShowCategory(isHome);
-    },[location]);
+        const isHome = location.pathname.length <= 1;
+        setIsHome(isHome);
+        setShowCategory(isHome);
+    }, [location]);
 
     const [activeIndex, setActiveIndex] = useState(0);
-
 
     const slides = [
         "https://seikowatches.co.in/cdn/shop/files/5-Sports_banner-Desktop_SRPK87K1_SRPK89K1_SRPK91K1_2049-x-1024_1024x1024.jpg?v=1712829089",
@@ -81,7 +79,7 @@ const Header = () => {
     useEffect(() => {
         const interval = setInterval(nextSlide, 5000); // Automatically switch slides every 5 seconds
         return () => clearInterval(interval); // Clear interval on component unmount
-    },[activeIndex]);
+    }, [activeIndex]);
 
     const categories = [
         "san pham 1",
@@ -98,28 +96,27 @@ const Header = () => {
                         <div className="col-6 header__top_left">
                             <ul>
                                 <li>
-                                    <AiOutlineMail/>watchstore@gmail.com
+                                    <AiOutlineMail />watchstore@gmail.com
                                 </li>
                                 <li>
-                                    <AiTwotoneCar/>Free ship trên toàn quốc
+                                    <AiTwotoneCar />Free ship trên toàn quốc
                                 </li>
                             </ul>
                         </div>
                         <div className="col-6 header__top_right">
-
                             <ul>
                                 <li>
-                                    <Link to={"#"}><AiOutlineHeart/></Link>
+                                    <Link to={"#"}><AiOutlineHeart /></Link>
                                 </li>
                                 <li>
-                                    <Link to={"#"}><AiOutlineTwitter/></Link>
+                                    <Link to={"#"}><AiOutlineTwitter /></Link>
                                 </li>
                                 <li>
-                                    <Link to={"#"}><AiTwotoneStar/></Link>
+                                    <Link to={"#"}><AiTwotoneStar /></Link>
                                 </li>
                                 <li>
-                                    <Link to={"#"}><AiOutlineUser/></Link>
-                                    <span>Đăng nhập</span>
+                                    <Link to={ROUTERS.pages.LOGIN}><AiOutlineUser/><span>Đăng nhập</span></Link>
+
                                 </li>
                             </ul>
                         </div>
@@ -137,21 +134,17 @@ const Header = () => {
                         <div className="header__menu">
                             <ul>
                                 {menus?.map((menus, menuKey) => (
-                                    <li key={menuKey} className={menuKey ===  0 ? "active" : ""}>
+                                    <li key={menuKey} className={menuKey === 0 ? "active" : ""}>
                                         <Link to={menus?.path}>{menus?.name}</Link>
-                                        {
-                                            menus.child && (
-                                                <ul className="header__menu__dropdown">
-                                                    {
-                                                        menus.child.map((childItem, childKey) => (
-                                                            <li key={'$(menuKey)-$(childKey)'}>
-                                                                <Link to={childItem.path}>{childItem.name}</Link>
-                                                            </li>
-                                                        ))
-                                                    }
-                                                </ul>
-                                            )
-                                        }
+                                        {menus.child && (
+                                            <ul className="header__menu__dropdown">
+                                                {menus.child.map((childItem, childKey) => (
+                                                    <li key={`${menuKey}-${childKey}`}>
+                                                        <Link to={childItem.path}>{childItem.name}</Link>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        )}
                                     </li>
                                 ))}
                             </ul>
@@ -161,7 +154,7 @@ const Header = () => {
                         <div className="header__cart">
                             <ul>
                                 <li>
-                                    <Link to={ROUTERS.pages.CART}><AiOutlineShoppingCart/>
+                                    <Link to={ROUTERS.pages.CART}><AiOutlineShoppingCart />
                                         <span>{cartItems.length}</span>
                                     </Link>
                                 </li>
@@ -174,7 +167,7 @@ const Header = () => {
                 <div className="row heros__categories_container">
                     <div className="col-lg-3 heros__categories">
                         <div className="heros__categories_all" onClick={() => setShowCategory(!isShowCategory)}>
-                            <AiOutlineMenu/>
+                            <AiOutlineMenu />
                             Danh sách sản phẩm
                         </div>
                         <ul className={isShowCategory ? "" : "hidden"}>
@@ -191,13 +184,13 @@ const Header = () => {
                         <div className="hero_search">
                             <div className="hero__search_form">
                                 <form action="">
-                                    <input type="text" placeholder="Bạn đang cần gì ? "/>
+                                    <input type="text" placeholder="Bạn đang cần gì ? " />
                                     <button className="" type="submit">Tìm kiếm</button>
                                 </form>
                             </div>
                             <div className="hero__search_phone">
                                 <div className="hero__search_phone_icon">
-                                    <AiOutlinePhone/>
+                                    <AiOutlinePhone />
                                 </div>
                                 <div className="hero__search_phone_text">
                                     <p>0123.456.789</p>
@@ -205,7 +198,7 @@ const Header = () => {
                                 </div>
                             </div>
                         </div>
-                        { isHome && (
+                        {isHome && (
                             <div className="hero__search_slider">
                                 <div className="slides">
                                     {slides.map((slide, index) => (
@@ -213,7 +206,7 @@ const Header = () => {
                                             key={index}
                                             className={`slide ${index === activeIndex ? 'active' : ''}`}
                                         >
-                                            <img src={slide} alt={`Slide ${index}`}/>
+                                            <img src={slide} alt={`Slide ${index}`} />
                                         </div>
                                     ))}
                                 </div>
@@ -221,11 +214,11 @@ const Header = () => {
                                 <button className="next" onClick={nextSlide}>&gt;</button>
                             </div>
                         )}
-
                     </div>
                 </div>
             </div>
         </>
     );
 };
+
 export default memo(Header);

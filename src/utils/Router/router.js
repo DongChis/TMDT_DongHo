@@ -7,6 +7,7 @@ export const ROUTERS = {
         Checkout:"thanh-toan",
         DETAIL: "/product/:id",
         CONTACT: "/contact",
-        REVIEW: "/review"
+        REVIEW: "/review",
+        LOGIN:"/dang-nhap"
     },
 }

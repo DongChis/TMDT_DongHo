@@ -21,9 +21,15 @@ const Checkout = () => {
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [showNotification, setShowNotification] = useState(false);
+    const [notificationMessage, setNotificationMessage] = useState('Đặt hàng thành công!');
+
+    const parsePrice = (priceString) => {
+        // Loại bỏ dấu chấm và chuyển đổi sang kiểu float
+        return parseFloat(priceString.replace(/\./g, ''));
+    };
 
     const calculateTotalPrice = () => {
-        return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+        return cartItems.reduce((total, item) => total + parsePrice(item.price) * item.quantity, 0);
     };
 
     const handlePayment = () => {
@@ -35,12 +41,20 @@ const Checkout = () => {
             alert('Vui lòng điền số điện thoại và email.');
             return;
         }
+
+        let message = 'Đặt hàng thành công!';
+        if (paymentMethod === 'online') {
+            message += "\nHóa đơn sẽ gửi về mail sau khi đã thanh toán!";
+        }
+        setNotificationMessage(message);
+
         setShowNotification(true);
         setTimeout(() => {
             setShowNotification(false);
             clearCart();
             setCartItems([]);
             navigate('/', { state: { cartItems: [] } });
+            window.scrollTo(0, 0); // Di chuyển đến đầu trang khi chuyển về trang chủ
         }, 2000);
     };
 
@@ -56,7 +70,7 @@ const Checkout = () => {
                                 <img src={item.productImageUrl} alt={item.title} />
                                 <div className="item-details">
                                     <p>{item.title}</p>
-                                    <p>Giá: {item.price.toLocaleString()} VND</p>
+                                    <p>Giá: {parsePrice(item.price).toLocaleString('de-DE')} VND</p>
                                     <p>Số lượng: {item.quantity}</p>
                                 </div>
                             </div>
@@ -65,7 +79,7 @@ const Checkout = () => {
                 </div>
 
                 <div className="checkout-total">
-                    <h3>Tổng Cộng: {calculateTotalPrice().toLocaleString()} VND</h3>
+                    <h3>Tổng Cộng: {calculateTotalPrice().toLocaleString('de-DE')} VND</h3>
                 </div>
 
                 <div className="delivery-method">
@@ -228,12 +242,11 @@ const Checkout = () => {
                 </button>
 
                 {showNotification && (
-                    <Notification message="Đặt hàng thành công!" />
+                    <Notification message={<span>{notificationMessage}</span>} />
                 )}
             </div>
         </>
     );
 };
-
 
 export default Checkout;
