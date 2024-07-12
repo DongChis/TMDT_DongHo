@@ -61,7 +61,7 @@
 const sellProducts = {
     all: {
         title: "Tất cả",
-        products :[
+        productList :[
             {
                 id: 1,
                 title: 'Seiko',
@@ -90,7 +90,7 @@ const sellProducts = {
     },
     sell: {
         title: "Giảm giá",
-        products :[
+        productList :[
             {
                 id: 6,
                 title: 'Tai nghe Bluetooth TWS Xiaomi Redmi Buds 4 Lite',

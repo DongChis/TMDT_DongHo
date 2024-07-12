@@ -1,53 +1,31 @@
-// src/pages/ProductPage.js
 
-import React, { useContext, useEffect, useState } from 'react';
-import dataAll from "../data/dataAll";
-import { useNavigate } from 'react-router-dom';
-import { CartContext } from './CartContext';
-import {setupListeners} from "@reduxjs/toolkit/query";
-import {setProducts} from "../redux/actions/productAction";
+import  {  useState } from 'react';
 import {CartInfo} from "./CartInfo";
-import sellProducts from "../data/ProductData";
-import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-
-const ProductPage = () => {
-    const [products, setProducts] = useState([]);
-    const { handleAddToCart, alertMessage } = useContext(CartContext);
-    const navigate = useNavigate();
+import {Link} from "react-router-dom";
 
 
-    useEffect(() => {
-        setProducts(sellProducts.all.products);
-
-    }, []);
-
-    const handleView = (product) => {
-
-        navigate(`/product/${product.id}`);
-    };
-
-    return (
-
-        <div className="container">
+export default function ProductList() {
+    const products = useSelector(state => state.products);
+   // const cart = useSelector(state => state.cart);
+    return (<div>
             <CartInfo></CartInfo>
-            {alertMessage && <div className="alert">{alertMessage}</div>}
-            {products.map(product => (
-
-                <div key={product.id} className="product-card">
-                    <img src={product.productImageUrl} alt="Đồng hồ sang trọng" className="product-image" />
-                    <h2 className="product-name">{product.title}</h2>
-                    <p className="product-description">{product.description}</p>
-                    <p className="product-price">{product.price.toLocaleString()} VND</p>
-                    <button onClick={() => handleView(product)} className="btn-view">Xem</button>
-                    <button onClick={() => handleAddToCart(product)} className="btn-add-to-cart">Thêm</button>
-                </div>
-
-            ))}
-        </div>
+                {products.map(product => (
+                    <Product key={product.id}
+                             id={product.id}
+                             title={product.title}
+                             description={product.description}
+                             url={product.url}
+                             votes={product.votes}
+                             submitterAvatarUrl={product.submitterAvatarUrl}
+                             productImageUrl={product.productImageUrl}
+                             color={product.color}
+                             isBuying={product.isBuying}
+                    />
+                ))}
+            </div>
     );
-};
-
+}
 
 export function Product(data) {
     var [product, setProduct] = useState(data);
@@ -61,17 +39,16 @@ export function Product(data) {
         }
         setProduct({...product, color: product.color === 'blue' ? 'red' : 'blue', isBuying: !product.isBuying})
     }
-    return (<div className="col-3 col-xs-12 col-sm-6 col-lg-3  pb-3">
-        <div className="card">
-            <img src={product.productImageUrl} className="card-img-top" alt="..."/>
-            <div className="card-body  text-center">
-                <h5 className="card-title text-center">{product.title} - {product.id}</h5>
-                <p className="card-text text-center">{product.description}.</p>
+    return (
+        <div className="">
+            <img src={product.productImageUrl} alt="..."/>
+            <div className="">
+                <h5 className="">{product.title} - {product.id}</h5>
+                <p className="">{product.description}.</p>
                 <a onClick={changeColor}
-                   className={"btn  text-center p-2 pl-2 pr-2 " + (product.color === 'red' ? " btn-danger " : " btn-primary")}>{product.isBuying ? "LOẠI BỎ" : "THÊM"}</a>
-                <Link to={`/product/${product.id}`} className={"btn btn-success p-2 pl-2 pr-2"}>XEM</Link>
+                   className={"" + (product.color === 'red' ? " btn-danger " : " btn-primary")}>{product.isBuying ? "LOẠI BỎ" : "THÊM"}</a>
+                <Link to={`/product/${product.id}`} className={""}>XEM</Link>
             </div>
         </div>
-    </div>);
+    );
 }
-export default ProductPage;
