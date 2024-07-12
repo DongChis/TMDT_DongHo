@@ -1,131 +1,110 @@
 import React, {memo, useContext, useEffect, useState} from 'react'
+import { useSelector, useDispatch } from 'react-redux';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import "./style.scss"
-import ProductList  from "../../component/ProductList";
+import productAll   from "../../data/dataAll";
 import "./tag.scss"
 import "pages/Profile/style.scss"
-import sellProducts from "../../data/ProductData";
+
 import { useNavigate } from 'react-router-dom';
 
 
-import mat1Img from "assets/image/slider1.jpg";
-import mat2Img from "assets/image/slider2.avif";
-import mat3Img from "assets/image/slider3.avif";
-import mat4Img from "assets/image/slider4.avif";
-import mat5Img from "assets/image/slider5.avif";
-import {CartContext} from "../../component/CartContext";
+
+
 
 
 const HomePage = () => {
-    var settings = {
+    const dispatch = useDispatch();
+    const products = useSelector(state => state.products);
+    const cart = useSelector(state => state.cart);
+
+    useEffect(() => {
+        dispatch({ type: 'product.load', payload: { products: productAll } });
+    }, [dispatch]);
+
+    const navigate = useNavigate();
+
+    const handleAddToCart = (product) => {
+        dispatch({ type: 'cart.add', payload: { product } });
+    };
+
+    const handleView = (product) => {
+        navigate(`/product/${product.id}`);
+    };
+
+    const settings = {
         dots: true,
         infinite: true,
         slidesToScroll: 1,
         slidesToShow: 1,
         speed: 500,
     };
-    const sliderItem = [
-        {
-            bgImg: mat1Img,
-            name: "Đồng hồ 1",
-        },
-        {
-            bgImg: mat2Img,
-            name: "Đồng hồ 2",
-        },
-        {
-            bgImg: mat3Img,
-            name: "Đồng hồ 3",
-        },
-        {
-            bgImg: mat4Img,
-            name: "Đồng hồ 4",
-        },
-        {
-            bgImg: mat5Img,
-            name: "Đồng hồ 5",
-        },
 
-    ];
-    const navigate = useNavigate();
-    const { handleAddToCart, alertMessage } = useContext(CartContext);
-    const handleView = (product) => {
 
-        navigate(`/product/${product.id}`);
+    const groupProductsByTitle = (data) => {
+        const grouped = data.reduce((acc, product) => {
+            const { title } = product;
+            if (!acc[title]) {
+                acc[title] = [];
+            }
+            acc[title].push(product);
+            return acc;
+        }, {});
+        return grouped;
     };
-    const renderSellProducts = (data) => {
+
+    const renderProducts = (data, sectionTitle) => {
+        if (!data || !Object.keys(data).length) return null;
+
         const tabList = [];
         const tabPanels = [];
-        Object.keys(data).forEach((key, index) => {
-            tabList.push(<Tab key={index}> {data[key].title}</Tab>);
-            const tabPanel = [];
-            data[key].products.forEach((item, j) => {
-                tabPanel.push(
-                    <>
 
-                        <div className="product-card">
-                            <img src={item.productImageUrl} alt="Đồng hồ sang trọng" className="product-image"/>
-                            <h2 className="product-name">{item.title}</h2>
-                            <p className="product-description">{item.description} </p>
-                            <p className="product-price">{item.price.toLocaleString()} VND</p>
-                            <button onClick={() => handleView(item)} className="btn-view">Xem</button>
-
-                            <button onClick={() => handleAddToCart(item)} className="btn-add-to-cart">Thêm</button>
-                        </div>
-
-                    </>
-                );
-            });
-            tabPanels.push(tabPanel);
+        Object.keys(data).forEach((title, index) => {
+            tabList.push(<Tab key={index}>{title}</Tab>);
+            const products = data[title].map((item, idx) => (
+                <div className="product-card" key={idx}>
+                    <img src={item.productImageUrl} alt="Đồng hồ sang trọng" className="product-image" />
+                    <h2 className="product-name">{item.name}</h2> {/* Hiển thị thuộc tính name */}
+                    <p className="product-description">{item.description}</p>
+                    <p className="product-price">{item.price.toLocaleString()} VND</p>
+                    <button onClick={() => handleView(item)} className="btn-view">Xem</button>
+                    <button onClick={() => handleAddToCart(item)} className="btn-add-to-cart">Thêm</button>
+                </div>
+            ));
+            tabPanels.push(
+                <TabPanel key={index}>
+                    <div className="row">{products}</div>
+                </TabPanel>
+            );
         });
 
         return (
-            <Tabs>
-                <TabList>
-                {tabList}
-                </TabList>
-                {tabPanels.map((item, key) => (
-                    <TabPanel key={key}>
-                        <div className="row">{item}</div>
-                    </TabPanel>
-                ))}
-            </Tabs>
-
+            <div className="container">
+                <div className="section-title">
+                    <h2>{sectionTitle}</h2>
+                    <Tabs>
+                        <TabList>
+                            {tabList}
+                        </TabList>
+                        {tabPanels}
+                    </Tabs>
+                </div>
+            </div>
         );
     };
 
+    const groupedProducts = groupProductsByTitle(products);
 
     return (
         <>
-
-            <div className="container-slider container">
-                <div className="section-title">
-                    <h2>Sản Phẩm NEW</h2>
-                </div>
-                <Slider {...settings} className="slider-content">
-                    {
-                        sliderItem.map((item, key) => (
-                            <div className="slider-content-items">
-                                <img src={item.bgImg} alt=""/>
-                                <p>{item.name}</p>
-                            </div>
-                        ))
-                    }
-
-                </Slider>
-            </div>
-
-            <div className="container">
-                <div className="section-title-sell section-title">
-                    <h2>Sản Phẩm Nổi Bật</h2>
-                    {renderSellProducts(sellProducts)}
-                </div>
-            </div>
+            {products.length > 0 && renderProducts(groupedProducts, "Sản Phẩm Nổi Bật")}
+            {products.length > 0 && renderProducts(groupedProducts, "Sản Phẩm Khuyến Mãi")}
         </>
     );
 };
+
 export default memo(HomePage);
