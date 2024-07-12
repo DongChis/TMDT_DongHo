@@ -1,12 +1,12 @@
-import React, {memo, useContext, useEffect, useState} from 'react'
+import React, {memo, useContext, useEffect, useState} from 'react';
 import "./style.scss";
 import {
     AiOutlineUser, AiOutlineTwitter, AiTwotoneStar,
     AiOutlineMail, AiTwotoneCar, AiOutlineShoppingCart, AiOutlineMenu, AiOutlinePhone, AiOutlineHeart
 } from "react-icons/ai";
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {ROUTERS} from "../../../utils/Router/router";
-import {CartContext,} from "../../../component/CartContext";
+import {CartContext} from "../../../component/CartContext";
 
 const Header = () => {
     const location = useLocation();

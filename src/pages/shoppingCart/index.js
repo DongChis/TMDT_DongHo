@@ -7,18 +7,24 @@ import BreadCrumb from "../theme/breadCrum";
 
 const ShoppingCart = () => {
     const { cartItems, handleQuantityChange, handleRemoveItem } = useContext(CartContext); // Sử dụng giỏ hàng từ context
-    const [isEmptyCart, setIsEmptyCart] = useState(false);
+    const [ setIsEmptyCart] = useState(false);
     const navigate = useNavigate();
 
+    const parsePrice = (priceString) => {
+        // Loại bỏ dấu chấm và chuyển đổi sang kiểu float
+        return parseFloat(priceString.replace(/\./g, ''));
+    };
+
     const calculateTotalPrice = () => {
-        return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+        return cartItems.reduce((total, item) => total + parsePrice(item.price) * item.quantity, 0);
     };
 
     const handleCheckout = () => {
         if (cartItems.length === 0) {
-            setIsEmptyCart(true);
+
         } else {
             navigate('/thanh-toan', { state: { cartItems } });
+            window.scrollTo(0, 0);
         }
     };
 
@@ -32,7 +38,7 @@ const ShoppingCart = () => {
                             <img src={item.productImageUrl} alt={item.title} />
                             <div className="item-details">
                                 <p>{item.title}</p>
-                                <p>Giá: {item.price.toLocaleString()} VND</p>
+                                <p>Giá: {parsePrice(item.price).toLocaleString('de-DE')} VND</p>
                                 <div className="quantity-controls">
                                     <button onClick={() => handleQuantityChange(item.id, -1)}>-</button>
                                     <span>{item.quantity}</span>
@@ -45,7 +51,7 @@ const ShoppingCart = () => {
                 </div>
                 {cartItems.length === 0 && <p className="empty-cart-message">Giỏ hàng của bạn đang trống.</p>}
                 <div className="cart-total">
-                    <h3>Tổng Cộng: {calculateTotalPrice().toLocaleString()} VND</h3>
+                    <h3>Tổng Cộng: {calculateTotalPrice().toLocaleString('de-DE')} VND</h3>
                 </div>
                 <button className="checkout-button" onClick={handleCheckout}>
                     Thanh Toán

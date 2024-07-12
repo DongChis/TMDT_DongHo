@@ -24,7 +24,9 @@ const productAll = [
         name: 'iPhone 14 Pro Max',
         description: 'Điện thoại iPhone 14 Pro Max 256GB',
         url: '#',
-        price: 100000,
+
+        price: '100.000',
+
         productImageUrl: 'https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/289700/iphone-14-pro-max-vang-thumb-600x600.jpg'
     },
     {
@@ -33,7 +35,9 @@ const productAll = [
         name: 'iPhone 14 Pro Max',
         description: 'Điện thoại iPhone 14 Pro Max 256GB',
         url: '#',
-        price: 100000,
+
+        price: '100.000',
+
         productImageUrl: 'https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/289700/iphone-14-pro-max-vang-thumb-600x600.jpg'
     },
     {
@@ -42,7 +46,9 @@ const productAll = [
         name: 'OPPO Reno8 T',
         description: 'OPPO Reno8 T 5G 256GB',
         url: '#',
-        price: 200000,
+
+        price: '200.000',
+
         productImageUrl: 'https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/301642/oppo-reno8t-vang1-thumb-600x600.jpg'
     },
     {
@@ -51,7 +57,9 @@ const productAll = [
         name: 'iPhone 14 Pro Max',
         description: 'Điện thoại iPhone 14 Pro Max 256GB',
         url: '#',
-        price: 100000,
+
+        price: '100.000',
+
         productImageUrl: 'https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/289700/iphone-14-pro-max-vang-thumb-600x600.jpg'
     },
     {

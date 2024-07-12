@@ -1,0 +1,120 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.login-form {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  text-align: center;
+  position: relative;
+
+  .login-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+
+    button {
+      flex: 1;
+      padding: 10px;
+      background: none;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+
+      &.active {
+        border-bottom: 2px solid #6a1b9a;
+      }
+    }
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  }
+
+  .btn-login {
+    background-color: #6a1b9a;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 10px;
+
+    &:hover {
+      background-color: #4a148c;
+    }
+  }
+
+  .forgot-password {
+    margin-bottom: 20px;
+
+    a {
+      color: #6a1b9a;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .social-login {
+    p {
+      margin-bottom: 10px;
+    }
+
+    .social-buttons {
+      display: flex;
+      justify-content: center;
+
+      button {
+        display: flex;
+        align-items: center;
+        background: #f0f0f0;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        margin: 0 5px;
+        flex: 1;
+
+        &.google {
+          background: #db4437;
+          color: white;
+        }
+
+        &.facebook {
+          background: #4267b2;
+          color: white;
+        }
+
+        svg {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}
