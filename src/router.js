@@ -9,6 +9,7 @@ import Checkout from "./pages/CheckOut";
 import ProductDetail, {loadProduct} from "./pages/ProductDetail";
 import ContactPage from "./pages/contactPage";
 import ReviewPage from "./pages/reviewPage";
+import Login from "./pages/login";
 
 
 function RenderRouter() {
@@ -47,6 +48,11 @@ function RenderRouter() {
         {
             path: ROUTERS.pages.CONTACT,
             component: <ContactPage />,
+
+        },
+        {
+            path: ROUTERS.pages.LOGIN,
+            component: <Login />,
 
         },
 

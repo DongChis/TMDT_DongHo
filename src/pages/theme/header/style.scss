@@ -54,9 +54,12 @@
     li:last-child {
       cursor: pointer;
       margin-left: 30px;
+      text-decoration: none;
       span {
         font-size: 20px;
         margin-left: 3px;
+        color: #1c1c1c;
+        text-decoration: none;
 
       }
     }
