@@ -1,48 +1,54 @@
-// src/pages/ProductPage.js
 
-import React, { useContext, useEffect, useState } from 'react';
-import dataAll from "../data/dataAll";
-import { useNavigate } from 'react-router-dom';
-import { CartContext } from './CartContext';
-import {setupListeners} from "@reduxjs/toolkit/query";
-import sellProducts from "../data/ProductData";
-
-const ProductPage = () => {
-    const [products, setProducts] = useState([]);
-    const { handleAddToCart, alertMessage } = useContext(CartContext);
-    const navigate = useNavigate();
+import  {  useState } from 'react';
+import {CartInfo} from "./CartInfo";
+import {useDispatch, useSelector} from "react-redux";
+import {Link} from "react-router-dom";
 
 
-    useEffect(() => {
-        setProducts(sellProducts.all.products);
-        // const fetchPosts = async()=> {
-        //    const respose = await fetch('https://fakestoreapi.com/products')
-        //     const posts = await  respose.json() ;
-        //    setProducts(posts);
-        // }
-       // fetchPosts();
-    }, []);
+export default function ProductList() {
+    const products = useSelector(state => state.products);
+   // const cart = useSelector(state => state.cart);
+    return (<div>
+            <CartInfo></CartInfo>
+                {products.map(product => (
+                    <Product key={product.id}
+                             id={product.id}
+                             title={product.title}
+                             description={product.description}
+                             url={product.url}
+                             votes={product.votes}
+                             submitterAvatarUrl={product.submitterAvatarUrl}
+                             productImageUrl={product.productImageUrl}
+                             color={product.color}
+                             isBuying={product.isBuying}
+                    />
+                ))}
+            </div>
+    );
+}
 
-    const handleView = (product) => {
+export function Product(data) {
+    var [product, setProduct] = useState(data);
 
-        navigate(`/product/${product.id}`);
-    };
-
+    const dispatch = useDispatch();
+    const changeColor = (e) => {
+        if (product.isBuying) {
+            dispatch({type: 'cart.minus', payload: {product: product}})
+        } else {
+            dispatch({type: 'cart.add', payload: {product: product}})
+        }
+        setProduct({...product, color: product.color === 'blue' ? 'red' : 'blue', isBuying: !product.isBuying})
+    }
     return (
-        <div className="container">
-            {alertMessage && <div className="alert">{alertMessage}</div>}
-            {products.map(product => (
-                <div key={product.id} className="product-card">
-                    <img src={product.productImageUrl} alt="Đồng hồ sang trọng" className="product-image" />
-                    <h2 className="product-name">{product.title}</h2>
-                    <p className="product-description">{product.description}</p>
-                    <p className="product-price">{product.price.toLocaleString()} VND</p>
-                    <button onClick={() => handleView(product)} className="btn-view">Xem</button>
-                    <button onClick={() => handleAddToCart(product)} className="btn-add-to-cart">Thêm</button>
-                </div>
-            ))}
+        <div className="">
+            <img src={product.productImageUrl} alt="..."/>
+            <div className="">
+                <h5 className="">{product.title} - {product.id}</h5>
+                <p className="">{product.description}.</p>
+                <a onClick={changeColor}
+                   className={"" + (product.color === 'red' ? " btn-danger " : " btn-primary")}>{product.isBuying ? "LOẠI BỎ" : "THÊM"}</a>
+                <Link to={`/product/${product.id}`} className={""}>XEM</Link>
+            </div>
         </div>
     );
-};
-
-export default ProductPage;
+}
