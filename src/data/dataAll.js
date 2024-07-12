@@ -61,6 +61,15 @@ const productAll = [
         price: '100.000',
 
         productImageUrl: 'https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/289700/iphone-14-pro-max-vang-thumb-600x600.jpg'
+    },
+    {
+        id: 7,
+        title: 'iPhone 14 Pro Max 256GB',
+        name: 'iPhone 14 Pro Max',
+        description: 'Điện thoại iPhone 14 Pro Max 256GB',
+        url: '#',
+        price: 100000,
+        productImageUrl: 'https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/289700/iphone-14-pro-max-vang-thumb-600x600.jpg'
     }
 ];
 
