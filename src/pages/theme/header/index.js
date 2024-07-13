@@ -15,9 +15,9 @@ const Header = () => {
     const openLoginModal = () => setLoginModalOpen(true);
     const closeLoginModal = () => setLoginModalOpen(false);
     const location = useLocation();
-    const navigate = useNavigate();
     const [isHome, setIsHome] = useState(location.pathname.length <= 1);
     const [isShowCategory, setShowCategory] = useState(isHome);
+    const [isSticky, setSticky] = useState(false);
     const [menus, setMenus] = useState([
         {
             name: "Trang chủ",
@@ -63,6 +63,13 @@ const Header = () => {
         const isHome = location.pathname.length <= 1;
         setIsHome(isHome);
         setShowCategory(isHome);
+
+        const handleScroll = () => {
+            setSticky(window.scrollY > 50);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
     }, [location]);
 
     const [activeIndex, setActiveIndex] = useState(0);
@@ -92,10 +99,12 @@ const Header = () => {
         "san pham 3",
         "san pham 4",
     ];
+
     const { cartItems } = useContext(CartContext);
+
     return (
         <>
-            <div className="header__top">
+            <div className={`header__top ${isSticky ? 'header__sticky' : ''}`}>
                 <div className="container">
                     <div className="row">
                         <div className="col-6 header__top_left">
@@ -120,35 +129,41 @@ const Header = () => {
                                     <Link to={"#"}><AiTwotoneStar /></Link>
                                 </li>
                                 <li>
+
                                     <button onClick={openLoginModal}><AiOutlineUser /><span>Đăng nhập</span></button>
+
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="container">
+            <div className={`container ${isSticky ? 'header__sticky' : ''}`}>
                 <div className="row">
                     <div className="col-xl-3 col-lg-3">
                         <div className="header__logo">
                             <h1>WATCH STORE</h1>
                         </div>
                     </div>
-                    <div className="col-xl-3 col-xl-6">
+                    <div className="col-xl-6 col-lg-6">
                         <div className="header__menu">
                             <ul>
                                 {menus?.map((menus, menuKey) => (
                                     <li key={menuKey} className={menuKey === 0 ? "active" : ""}>
                                         <Link to={menus?.path}>{menus?.name}</Link>
-                                        {menus.child && (
-                                            <ul className="header__menu__dropdown">
-                                                {menus.child.map((childItem, childKey) => (
-                                                    <li key={`${menuKey}-${childKey}`}>
-                                                        <Link to={childItem.path}>{childItem.name}</Link>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        )}
+                                        {
+                                            menus.child && (
+                                                <ul className="header__menu__dropdown">
+                                                    {
+                                                        menus.child.map((childItem, childKey) => (
+                                                            <li key={`${menuKey}-${childKey}`}>
+                                                                <Link to={childItem.path}>{childItem.name}</Link>
+                                                            </li>
+                                                        ))
+                                                    }
+                                                </ul>
+                                            )
+                                        }
                                     </li>
                                 ))}
                             </ul>
