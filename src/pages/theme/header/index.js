@@ -1,14 +1,19 @@
-import React, {memo, useContext, useEffect, useState} from 'react';
+import React, { memo, useContext, useEffect, useState } from 'react';
 import "./style.scss";
 import {
     AiOutlineUser, AiOutlineTwitter, AiTwotoneStar,
     AiOutlineMail, AiTwotoneCar, AiOutlineShoppingCart, AiOutlineMenu, AiOutlinePhone, AiOutlineHeart
 } from "react-icons/ai";
-import {Link, useLocation, useNavigate} from "react-router-dom";
-import {ROUTERS} from "../../../utils/Router/router";
-import {CartContext} from "../../../component/CartContext";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { ROUTERS } from "../../../utils/Router/router";
+import { CartContext } from "../../../component/CartContext";
+import LoginModal from 'pages/login/index';
 
 const Header = () => {
+    const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+
+    const openLoginModal = () => setLoginModalOpen(true);
+    const closeLoginModal = () => setLoginModalOpen(false);
     const location = useLocation();
     const [isHome, setIsHome] = useState(location.pathname.length <= 1);
     const [isShowCategory, setShowCategory] = useState(isHome);
@@ -124,8 +129,9 @@ const Header = () => {
                                     <Link to={"#"}><AiTwotoneStar /></Link>
                                 </li>
                                 <li>
-                                    <Link to={"#"}><AiOutlineUser /></Link>
-                                    <span>Đăng nhập</span>
+
+                                    <button onClick={openLoginModal}><AiOutlineUser /><span>Đăng nhập</span></button>
+
                                 </li>
                             </ul>
                         </div>
@@ -230,6 +236,7 @@ const Header = () => {
                     </div>
                 </div>
             </div>
+            <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
         </>
     );
 };
