@@ -1,4 +1,5 @@
 
+
 import  {  useState } from 'react';
 import {CartInfo} from "./CartInfo";
 import {useDispatch, useSelector} from "react-redux";
@@ -17,7 +18,6 @@ export default function ProductList() {
                 />
             ))}
         </div>
-
     );
 }
 
