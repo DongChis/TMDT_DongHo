@@ -1,29 +1,26 @@
-
-import  {  useState } from 'react';
-import {CartInfo} from "./CartInfo";
-import {useDispatch, useSelector} from "react-redux";
-import {Link} from "react-router-dom";
-
+import { useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function ProductList() {
     const products = useSelector(state => state.products);
-   // const cart = useSelector(state => state.cart);
-    return (<div>
-            <CartInfo></CartInfo>
-                {products.map(product => (
-                    <Product key={product.id}
-                             id={product.id}
-                             title={product.title}
-                             description={product.description}
-                             url={product.url}
-                             votes={product.votes}
-                             submitterAvatarUrl={product.submitterAvatarUrl}
-                             productImageUrl={product.productImageUrl}
-                             color={product.color}
-                             isBuying={product.isBuying}
-                    />
-                ))}
-            </div>
+
+    return (
+        <div>
+            {products.map(product => (
+                <Product key={product.id}
+                         id={product.id}
+                         title={product.title}
+                         description={product.description}
+                         url={product.url}
+                         votes={product.votes}
+                         submitterAvatarUrl={product.submitterAvatarUrl}
+                         productImageUrl={product.productImageUrl}
+                         color={product.color}
+                         isBuying={product.isBuying}
+                />
+            ))}
+        </div>
     );
 }
 
@@ -31,17 +28,17 @@ export function Product(data) {
     var [product, setProduct] = useState(data);
 
     const dispatch = useDispatch();
-    const changeColor = (e) => {
+    const changeColor = () => {
         if (product.isBuying) {
-            dispatch({type: 'cart.minus', payload: {product: product}})
+            dispatch({ type: 'cart.minus', payload: { product: product } })
         } else {
-            dispatch({type: 'cart.add', payload: {product: product}})
+            dispatch({ type: 'cart.add', payload: { product: product } })
         }
-        setProduct({...product, color: product.color === 'blue' ? 'red' : 'blue', isBuying: !product.isBuying})
+        setProduct({ ...product, color: product.color === 'blue' ? 'red' : 'blue', isBuying: !product.isBuying })
     }
     return (
         <div className="">
-            <img src={product.productImageUrl} alt="..."/>
+            <img src={product.productImageUrl} alt="..." />
             <div className="">
                 <h5 className="">{product.title} - {product.id}</h5>
                 <p className="">{product.description}.</p>

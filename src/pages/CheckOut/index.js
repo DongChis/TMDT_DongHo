@@ -1,18 +1,17 @@
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import "./style.scss";
 import BreadCrumb from "../theme/breadCrum";
 import bankLogo from '../../assets/image/bidv-logo.png';
 import momoLogo from '../../assets/image/momo-logo.png';
-
-import React, { useState, useContext } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import Notification from '../NotificationBox/Notification';
-import { CartContext } from '../../component/CartContext';
+import { clearCart } from '../../redux/actions/productAction';
 
 const Checkout = () => {
-    const location = useLocation();
+    const cartItems = useSelector(state => state.cart);
     const navigate = useNavigate();
-    const { clearCart } = useContext(CartContext);
-    const [cartItems, setCartItems] = useState(location.state?.cartItems || []);
+    const dispatch = useDispatch();
 
     const [deliveryMethod, setDeliveryMethod] = useState('home');
     const [paymentMethod, setPaymentMethod] = useState('online');
@@ -24,8 +23,7 @@ const Checkout = () => {
     const [notificationMessage, setNotificationMessage] = useState('Đặt hàng thành công!');
 
     const parsePrice = (priceString) => {
-        // Loại bỏ dấu chấm và chuyển đổi sang kiểu float
-        return parseFloat(priceString.replace(/\./g, ''));
+        return priceString ? parseFloat(priceString.replace(/\./g, '')) : 0;
     };
 
     const calculateTotalPrice = () => {
@@ -51,8 +49,7 @@ const Checkout = () => {
         setShowNotification(true);
         setTimeout(() => {
             setShowNotification(false);
-            clearCart();
-            setCartItems([]);
+            dispatch(clearCart()); // Sử dụng action để xóa giỏ hàng
             navigate('/', { state: { cartItems: [] } });
             window.scrollTo(0, 0); // Di chuyển đến đầu trang khi chuyển về trang chủ
         }, 2000);
