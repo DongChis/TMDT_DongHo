@@ -20,7 +20,7 @@ const Checkout = () => {
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [showNotification, setShowNotification] = useState(false);
-    const [notificationMessage, setNotificationMessage] = useState('Đặt hàng thành công!');
+    const [notificationMessage, setNotificationMessage] = useState('');
 
     const parsePrice = (priceString) => {
         return priceString ? parseFloat(priceString.replace(/\./g, '')) : 0;
@@ -28,6 +28,16 @@ const Checkout = () => {
 
     const calculateTotalPrice = () => {
         return cartItems.reduce((total, item) => total + parsePrice(item.price) * item.quantity, 0);
+    };
+
+    const isValidEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
+    const isValidPhone = (phone) => {
+        const phoneRegex = /^[0-9]{10}$/;
+        return phoneRegex.test(phone);
     };
 
     const handlePayment = () => {
@@ -40,18 +50,28 @@ const Checkout = () => {
             return;
         }
 
+        if (!isValidPhone(phone)) {
+            alert('Số điện thoại không hợp lệ. Vui lòng nhập lại.');
+            return;
+        }
+
+        if (!isValidEmail(email)) {
+            alert('Email không hợp lệ. Vui lòng nhập lại.');
+            return;
+        }
+
         let message = 'Đặt hàng thành công!';
         if (paymentMethod === 'online') {
-            message += "\nHóa đơn sẽ gửi về mail sau khi đã thanh toán!";
+            message += "<br/>Hóa đơn sẽ gửi về mail sau khi đã thanh toán!";
         }
         setNotificationMessage(message);
 
         setShowNotification(true);
         setTimeout(() => {
             setShowNotification(false);
-            dispatch(clearCart()); // Sử dụng action để xóa giỏ hàng
+            dispatch(clearCart());
             navigate('/', { state: { cartItems: [] } });
-            window.scrollTo(0, 0); // Di chuyển đến đầu trang khi chuyển về trang chủ
+            window.scrollTo(0, 0);
         }, 2000);
     };
 
@@ -66,7 +86,7 @@ const Checkout = () => {
                             <div className="checkout-item">
                                 <img src={item.productImageUrl} alt={item.title} />
                                 <div className="item-details">
-                                    <p>{item.title}</p>
+                                    <p>{item.name}</p>
                                     <p>Giá: {parsePrice(item.price).toLocaleString('de-DE')} VND</p>
                                     <p>Số lượng: {item.quantity}</p>
                                 </div>
@@ -106,57 +126,67 @@ const Checkout = () => {
                 {deliveryMethod === 'home' && (
                     <div className="delivery-info">
                         <h3>Thông Tin Nhận Hàng</h3>
-                        <label>
-                            Địa chỉ:
+                        <div className="input-group">
+                            <label htmlFor="address">Địa chỉ</label>
                             <input
                                 type="text"
+                                id="address"
                                 value={address}
                                 onChange={(e) => setAddress(e.target.value)}
                                 placeholder="Nhập địa chỉ nhận hàng"
+                                required
                             />
-                        </label>
-                        <label>
-                            Số điện thoại:
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="phone">Số điện thoại</label>
                             <input
                                 type="text"
+                                id="phone"
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
                                 placeholder="Nhập số điện thoại"
+                                required
                             />
-                        </label>
-                        <label>
-                            Email:
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="email">Email</label>
                             <input
                                 type="email"
+                                id="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Nhập email"
+                                required
                             />
-                        </label>
+                        </div>
                     </div>
                 )}
 
                 {deliveryMethod === 'store' && (
                     <div className="cus-info">
                         <h3>Thông Tin Khách Hàng</h3>
-                        <label>
-                            Số điện thoại của bạn:
+                        <div className="input-group">
+                            <label htmlFor="cus-phone">Số điện thoại </label>
                             <input
                                 type="text"
+                                id="cus-phone"
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
                                 placeholder="Nhập số điện thoại"
+                                required
                             />
-                        </label>
-                        <label>
-                            Email của bạn:
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="cus-email">Email</label>
                             <input
                                 type="email"
+                                id="cus-email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Nhập email"
+                                required
                             />
-                        </label>
+                        </div>
                         <h3>Thông Tin Cửa Hàng</h3>
                         <div className="store-details">
                             <p>Địa chỉ cửa hàng: 169 Lê Văn Chí</p>
@@ -239,7 +269,7 @@ const Checkout = () => {
                 </button>
 
                 {showNotification && (
-                    <Notification message={<span>{notificationMessage}</span>} />
+                    <Notification message={<span dangerouslySetInnerHTML={{ __html: notificationMessage }}></span>} />
                 )}
             </div>
         </>

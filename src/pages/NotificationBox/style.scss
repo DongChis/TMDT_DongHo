@@ -34,6 +34,7 @@
 .checkmark svg {
   width: 100%;
   height: 100%;
+  overflow: visible; // Đảm bảo rằng SVG không bị cắt xén
 }
 
 .checkmark-circle {

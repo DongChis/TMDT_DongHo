@@ -44,7 +44,7 @@ const ShoppingCart = () => {
                         <div key={item.id} className="cart-item">
                             <img src={item.productImageUrl} alt={item.title} />
                             <div className="item-details">
-                                <p>{item.title}</p>
+                                <p>{item.name}</p>
                                 <p>Giá: {parsePrice(item.price).toLocaleString('de-DE')} VND</p>
                                 <div className="quantity-controls">
                                     <button onClick={() => handleDecreaseQuantity(item)}>-</button>
