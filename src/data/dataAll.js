@@ -422,6 +422,7 @@ const productAll = [
 
         price: '7.770.000',
 
+
         productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2021/11/53229-SVMWSV-1-1.jpg'
     },{
         id: 43,
@@ -658,6 +659,7 @@ const productHot = [
         price: '17.500.000',
 
         productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/T006.407.16.053.00.jpg'
+
     }
 
 

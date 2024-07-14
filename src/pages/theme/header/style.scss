@@ -57,6 +57,7 @@
       margin-left: 30px;
       text-decoration: none;
 
+
       button {
         display: flex;
         align-items: center;
@@ -85,6 +86,7 @@
             color: white;
           }
         }
+
       }
     }
   }
@@ -203,6 +205,16 @@
   }
 }
 
+.header__sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #fff;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
 .heros__categories {
   position: relative;
 
@@ -232,7 +244,7 @@
     position: absolute;
     width: 99.5%;
     background: white;
-    transition: all, 0.2s;
+    transition: all 0.2s;
     opacity: 1;
 
     li {
