@@ -6,7 +6,7 @@ import {
 } from "react-icons/ai";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ROUTERS } from "../../../utils/Router/router";
-import { CartContext } from "../../../component/CartContext";
+import { useSelector } from 'react-redux';
 import LoginModal from 'pages/login/index';
 
 const Header = () => {
@@ -92,7 +92,9 @@ const Header = () => {
         "san pham 3",
         "san pham 4",
     ];
-    const { cartItems } = useContext(CartContext);
+
+    const cartItems = useSelector(state => state.cart);
+
     return (
         <>
             <div className="header__top">

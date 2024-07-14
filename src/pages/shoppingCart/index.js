@@ -1,36 +1,43 @@
-import React, { memo, useContext, useState } from 'react';
+import React, { memo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { CartContext } from '../../component/CartContext';
-
-import "./style.scss";
-import BreadCrumb from "../theme/breadCrum";
+import './style.scss';
 
 const ShoppingCart = () => {
-    const { cartItems, handleQuantityChange, handleRemoveItem } = useContext(CartContext); // Sử dụng giỏ hàng từ context
-    const [ setIsEmptyCart] = useState(false);
+    const cartItems = useSelector(state => state.cart);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const parsePrice = (priceString) => {
-        // Loại bỏ dấu chấm và chuyển đổi sang kiểu float
-        return parseFloat(priceString.replace(/\./g, ''));
+        return priceString ? parseFloat(priceString.replace(/\./g, '')) : 0;
     };
 
     const calculateTotalPrice = () => {
-        return cartItems.reduce((total, item) => total + parsePrice(item.price) * item.quantity, 0);
+        return cartItems.reduce((total, item) => total + parsePrice(item.price) * (item.quantity || 1), 0);
     };
 
     const handleCheckout = () => {
         if (cartItems.length === 0) {
-
+            alert('Giỏ hàng của bạn đang trống.');
         } else {
             navigate('/thanh-toan', { state: { cartItems } });
             window.scrollTo(0, 0);
         }
     };
 
+    const handleRemoveItem = (item) => {
+        dispatch({ type: 'cart.minus', payload: { product: item } });
+    };
+
+    const handleDecreaseQuantity = (item) => {
+        if (item.quantity > 1) {
+            dispatch({ type: 'cart.add', payload: { product: { ...item, quantity: item.quantity - 1 } } });
+        }
+    };
+
     return (
         <>
-            <BreadCrumb name="Giỏ hàng"/>
+            <div className="bread-crumb">Giỏ hàng</div>
             <div className="shopping-cart">
                 <div className="cart-items">
                     {cartItems.map(item => (
@@ -40,12 +47,12 @@ const ShoppingCart = () => {
                                 <p>{item.title}</p>
                                 <p>Giá: {parsePrice(item.price).toLocaleString('de-DE')} VND</p>
                                 <div className="quantity-controls">
-                                    <button onClick={() => handleQuantityChange(item.id, -1)}>-</button>
-                                    <span>{item.quantity}</span>
-                                    <button onClick={() => handleQuantityChange(item.id, 1)}>+</button>
+                                    <button onClick={() => handleDecreaseQuantity(item)}>-</button>
+                                    <span>{item.quantity || 1}</span>
+                                    <button onClick={() => dispatch({ type: 'cart.add', payload: { product: { ...item, quantity: item.quantity + 1 } } })}>+</button>
                                 </div>
                             </div>
-                            <button className="remove-item" onClick={() => handleRemoveItem(item.id)}>Xóa</button>
+                            <button className="remove-item" onClick={() => handleRemoveItem(item)}>Xóa</button>
                         </div>
                     ))}
                 </div>
