@@ -7,7 +7,7 @@ const ProductPage = () => {
     return(
         <>
            <BreadCrumb name="Danh sách sản phẩm" />
-            <div className="container">
+            <div className="container-product">
                 <ProductList />
             </div>
         </>

@@ -126,8 +126,8 @@ const HomePage = () => {
 
     return (
         <>
-            {products.length > 0 && renderProducts(groupedProducts, "Sản Phẩm Nổi Bật")}
-            {products.length > 0 && renderProducts(groupedProducts, "Sản Phẩm Khuyến Mãi")}
+            {products.length > 0 && renderProducts(groupedProducts, "THƯƠNG HIỆU ĐỒNG HỒ")}
+            {products.length > 0 && renderProducts(groupedProducts, "SẢN PHẨM MỚI RA MẮT")}
         </>
     );
 };

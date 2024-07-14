@@ -3,94 +3,101 @@
 
 .header__top {
   background-color: #f5f5f5;
-}
 
-.header__top_left {
-  ul {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    padding: 10px 0 13px;
-    column-gap: 20px;
-    li {
-      font-size: 20px;
-      color: map.get($theme-color, "normal-text");
+  .header__top_left {
+    ul {
       display: flex;
       align-items: center;
-      column-gap: 3px;
-    }
-    li:first-child {
-      position: relative;
-      &:after {
-        position: absolute;
-        top: 1px;
-        right: -12px;
-        height: 22px;
-        width: 1px;
-        background: black;
-        opacity: 0.1;
-        content: "";
-      }
-    }
-  }
-}
-
-.header__top_right {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 10px 0 13px;
-
-  ul {
-    display: flex;
-    column-gap: 10px;
-    list-style: none;
-
-    a {
-      font-size: 20px;
-      display: inline-block;
-      color: map.get($theme-color, "normal-text");
-    }
-
-    li:last-child {
-      cursor: pointer;
-      margin-left: 30px;
-      text-decoration: none;
-
-
-      button {
+      list-style: none;
+      padding: 10px 0 13px;
+      column-gap: 20px;
+      li {
+        font-size: 20px;
+        color: map.get($theme-color, "normal-text");
         display: flex;
         align-items: center;
-        justify-content: center;
-        height: 25px;
-        background-color: #f5f5f5;
-        border: none;
-        cursor: pointer;
-        padding: 10px 20px;
-
-        svg {
-          font-size: 20px;
-          margin-right: 5px;
+        column-gap: 3px;
+      }
+      li:first-child {
+        position: relative;
+        &:after {
+          position: absolute;
+          top: 1px;
+          right: -12px;
+          height: 22px;
+          width: 1px;
+          background: black;
+          opacity: 0.1;
+          content: "";
         }
-
-        span {
-          font-size: 20px;
-          color: #1c1c1c;
-        }
-
-        &:hover {
-          background-color: map.get($theme-color, "main");
-          color: white;
-
-          svg, span {
-            color: white;
-          }
-        }
-
       }
     }
   }
+
+  .header__top_right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 0 13px;
+
+    ul {
+      display: flex;
+      column-gap: 10px;
+      list-style: none;
+
+      a {
+        font-size: 20px;
+        display: inline-block;
+        color: map.get($theme-color, "normal-text");
+      }
+
+      li:last-child {
+        cursor: pointer;
+        margin-left: 30px;
+        text-decoration: none;
+
+
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 25px;
+          background-color: map.get($theme-color, "main");
+          border: none;
+          cursor: pointer;
+          padding: 10px 20px;
+
+          svg {
+            font-size: 20px;
+            margin-right: 5px;
+            color: white;
+          }
+
+          span {
+            font-size: 20px;
+            color: white;
+          }
+
+          &:hover {
+            background-color: map.get($theme-color, "normal-text");
+            color: white;
+
+            svg, span {
+              color: white;
+            }
+          }
+
+        }
+      }
+    }
+  }
+
+
 }
+
+
+
+
 
 .header__logo {
   padding: 15px 0;
@@ -143,7 +150,7 @@
       background: map.get($theme-color, "normal-text");
       display: block;
       position: absolute;
-      width: 130px;
+      width: 190px;
       z-index: 9;
       padding: 5px 0;
       transition: all 0.3s;
@@ -218,6 +225,7 @@
 .heros__categories {
   position: relative;
 
+
   .heros__categories_all {
     background: map.get($theme-color, "main");
     color: white;
@@ -231,6 +239,7 @@
     span {
       font-size: 16px;
       margin-right: 5px;
+
     }
 
     svg {
@@ -254,28 +263,70 @@
         text-decoration: none;
         background-color: transparent;
         font-size: 16px;
-        color: red;
+        color: map.get($theme-color, "main");
         line-height: 39px;
         display: block;
         padding-left: 40px;
+        padding-top: 7px;
       }
 
       &:hover {
         background: white;
 
         a {
-          color: map.get($theme-color, "main");
+          color: map.get($theme-color, "normal-text");
         }
       }
     }
 
     &.hidden {
       opacity: 0;
+
     }
   }
 }
 
 .heros__search_container {
+
+  .hero__search_form {
+    padding-left: 15px;
+    width: 610px;
+    height: 50px;
+    float: left;
+
+    form {
+      display: flex;
+      align-items: center;
+
+      input {
+        font-size: 16px;
+        height: 48px;
+        padding-left: 20px;
+        border: 1px solid #b7b7b7;
+        color: map.get($theme-color, "bold-text");
+        width: 70%;
+
+        &:focus {
+          outline: none;
+          border: none;
+        }
+      }
+      button {
+        font-size: 14px;
+        font-weight: 800;
+        display: inline-block;
+        color: white;
+        background: map.get($theme-color, "main");
+        padding: 16px 30px 17px;
+        text-transform: uppercase;
+        height: 100%;
+        border: none;
+      }
+
+    }
+
+  }
+
   .hero__search_slider {
     margin: 25px 0 0 15px;
     position: relative;
@@ -332,43 +383,7 @@
     }
   }
 
-  .hero__search_form {
-    padding-left: 15px;
-    width: 610px;
-    height: 50px;
-    float: left;
 
-    form {
-      display: flex;
-      align-items: center;
-    }
-
-    input {
-      font-size: 16px;
-      height: 48px;
-      padding-left: 20px;
-      border: 1px solid #b7b7b7;
-      color: map.get($theme-color, "bold-text");
-      width: 70%;
-
-      &:focus {
-        outline: none;
-        border: none;
-      }
-    }
-
-    button {
-      font-size: 14px;
-      font-weight: 800;
-      display: inline-block;
-      color: white;
-      background: map.get($theme-color, "main");
-      padding: 16px 30px 17px;
-      text-transform: uppercase;
-      height: 100%;
-      border: none;
-    }
-  }
 
   .hero__search_phone_icon {
     display: flex;

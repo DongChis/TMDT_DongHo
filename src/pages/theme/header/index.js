@@ -32,21 +32,17 @@ const Header = () => {
             path: ROUTERS.pages.PRODUCTS,
             child: [
                 {
-                    name: "Đồng hồ 1",
-                    path: "",
+                    name: "Đồng hồ nam",
+                    path: "/san-pham",
                 },
                 {
-                    name: "Đồng hồ 2",
-                    path: "",
+                    name: "Đồng hồ nữ",
+                    path: "/san-pham",
                 },
                 {
-                    name: "Đồng hồ 3",
-                    path: "",
+                    name: "Thương hiệu",
+                    path: "/san-pham",
                 },
-                {
-                    name: "Đồng hồ 4",
-                    path: "",
-                }
             ]
         },
         {
@@ -87,10 +83,16 @@ const Header = () => {
     }, [activeIndex]);
 
     const categories = [
-        "san pham 1",
-        "san pham 2",
-        "san pham 3",
-        "san pham 4",
+        "Đồng hồ Seiko",
+        "Đồng hồ KOI",
+        "Đồng hồ Candino",
+        "Đồng hồ Orient",
+        "Đồng hồ Tissot",
+        "Đồng hồ Citizen",
+        "Đồng hồ Saga",
+        "Đồng hồ Fossil",
+        "Đồng hồ Rado",
+
     ];
 
     const cartItems = useSelector(state => state.cart);
