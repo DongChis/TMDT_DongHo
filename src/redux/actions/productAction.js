@@ -7,12 +7,25 @@ export const loadProducts = (data) => {
         }
     }
 }
-export const addCartProducts = (data) => {
+// export const addCartProducts = (data) => {
+//     return {
+//         type: 'cart.add',
+//         payload: {
+//             product: data
+//         }
+//     }
+// }
+//
+// export const removeFromCart = (product) => {
+//     return {
+//         type: 'cart.minus',
+//         payload: {
+//             product: product
+//         }
+//     }
+// }
+export const clearCart = () => {
     return {
-        type: 'cart.add',
-        payload: {
-            products: data
-        }
-    }
-}
-
+        type: 'CLEAR_CART'
+    };
+};

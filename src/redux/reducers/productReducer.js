@@ -1,11 +1,12 @@
+// src/redux/reducers/productReducer.js
 import { createReducer } from "@reduxjs/toolkit";
 
-const initState = {
+const initialState = {
     products: [],
     cart: checkCart(),
 };
 
-export const root = createReducer(initState, (builder) => {
+export const root = createReducer(initialState, (builder) => {
     builder
         .addCase('product.load', (state, action) => {
             let products = action.payload.products;
@@ -26,13 +27,21 @@ export const root = createReducer(initState, (builder) => {
         })
         .addCase('cart.add', (state, action) => {
             if (!state.cart) state.cart = checkCart();
-            state.cart = [...state.cart, action.payload.product];
+            const existingProduct = state.cart.find(product => product.id === action.payload.product.id);
+            if (existingProduct) {
+                existingProduct.quantity = action.payload.product.quantity;
+            } else {
+                state.cart = [...state.cart, { ...action.payload.product, quantity: 1 }];
+            }
             saveCart(state.cart);
         })
         .addCase('cart.minus', (state, action) => {
             if (!state.cart) state.cart = checkCart();
-            let cart = state.cart.filter(product => product.id !== action.payload.product.id);
-            state.cart = [...cart];
+            state.cart = state.cart.filter(product => product.id !== action.payload.product.id);
+            saveCart(state.cart);
+        })
+        .addCase('CLEAR_CART', (state) => {
+            state.cart = [];
             saveCart(state.cart);
         });
 });

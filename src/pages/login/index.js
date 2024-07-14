@@ -1,33 +1,115 @@
-import React, { memo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './style.scss';
 import { AiOutlineGoogle, AiOutlineFacebook } from "react-icons/ai";
 
-const LoginPage = () => {
+const LoginModal = ({ isOpen, onClose }) => {
+    const [isLogin, setIsLogin] = useState(true);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [fullName, setFullName] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [email, setEmail] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const navigate = useNavigate();
+    const location = useLocation();
+    const [previousPath, setPreviousPath] = useState('/');
 
-    const handleLogin = (e) => {
-        e.preventDefault();
-        // Logic để xử lý đăng nhập ở đây
-        if (username === 'admin' && password === 'password') {
-            navigate('/home');
+    useEffect(() => {
+        if (isOpen) {
+            setIsLogin(true); // Luôn đặt trạng thái thành "Đăng nhập" khi mở
+            setPreviousPath(location.pathname); // Lưu trữ vị trí trang hiện tại
+        }
+    }, [isOpen, location.pathname]);
+
+    const handleToggle = (login) => {
+        setIsLogin(login);
+        if (!login) {
+            // Đặt lại các trạng thái khi chuyển sang chế độ "Đăng ký"
+            setFullName('');
+            setPhoneNumber('');
+            setEmail('');
+            setUsername('');
+            setPassword('');
+            setConfirmPassword('');
         } else {
-            alert('Tên đăng nhập hoặc mật khẩu không đúng');
+            // Đặt lại các trạng thái khi chuyển sang chế độ "Đăng nhập"
+            setUsername('');
+            setPassword('');
         }
     };
 
+    const handleLogin = (e) => {
+        e.preventDefault();
+        if (username === 'admin' && password === 'password') {
+            navigate('previousPath');
+            onClose();
+        } else {
+            alert('Tài khoản hoặc mật khẩu không đúng');
+        }
+    };
+
+    const handleRegister = (e) => {
+        e.preventDefault();
+        if (password !== confirmPassword) {
+            alert('Mật khẩu không trùng khớp');
+            return;
+        }
+        // Thực hiện đăng ký
+        alert('Registration successful');
+        navigate(previousPath); // quay về trang đang ở trước khi vô đăng nhập
+        onClose();
+    };
+
+    if (!isOpen) return null;
+
     return (
-        <div className="login-container">
-            <div className="login-form">
-                <div className="login-tabs">
-                    <button className="active">Đăng nhập</button>
-                    <button>Đăng ký</button>
+        <div className="login-modal-overlay">
+            <div className="login-modal">
+                <button className="close-button" onClick={onClose}>×</button>
+                <div className="toggle-container">
+                    <button className={`toggle-button ${isLogin ? 'active' : ''}`} onClick={() => handleToggle(true)}>Đăng nhập</button>
+                    <button className={`toggle-button ${!isLogin ? 'active' : ''}`} onClick={() => handleToggle(false)}>Đăng ký</button>
+                    <div className={`toggle-slider ${isLogin ? 'left' : 'right'}`}></div>
                 </div>
-                <form onSubmit={handleLogin}>
-                    <div className="form-group">
-                        <label htmlFor="username">Email hoặc số điện thoại</label>
+                <h2>{isLogin ? 'Đăng nhập' : 'Đăng ký'}</h2>
+                <form onSubmit={isLogin ? handleLogin : handleRegister}>
+                    {!isLogin && (
+                        <>
+                            <div className="input-group">
+                                <label htmlFor="fullName">Họ tên</label>
+                                <input
+                                    type="text"
+                                    id="fullName"
+                                    value={fullName}
+                                    onChange={(e) => setFullName(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className="input-group">
+                                <label htmlFor="phoneNumber">Số điện thoại</label>
+                                <input
+                                    type="text"
+                                    id="phoneNumber"
+                                    value={phoneNumber}
+                                    onChange={(e) => setPhoneNumber(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className="input-group">
+                                <label htmlFor="email">Email</label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
+                            </div>
+                        </>
+                    )}
+                    <div className="input-group">
+                        <label htmlFor="username">{isLogin ? 'Email hoặc Sdt' : 'Tên đăng nhập'}</label>
                         <input
                             type="text"
                             id="username"
@@ -36,7 +118,7 @@ const LoginPage = () => {
                             required
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="input-group">
                         <label htmlFor="password">Mật khẩu</label>
                         <input
                             type="password"
@@ -46,21 +128,30 @@ const LoginPage = () => {
                             required
                         />
                     </div>
-                    <button type="submit" className="btn-login">Đăng Nhập</button>
+                    {!isLogin && (
+                        <div className="input-group">
+                            <label htmlFor="confirmPassword">Xác nhận mật khẩu</label>
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                required
+                            />
+                        </div>
+                    )}
+                    <button type="submit">{isLogin ? 'Đăng nhập' : 'Đăng ký'}</button>
                 </form>
-                <div className="forgot-password">
-                    <a href="#">Bạn quên mật khẩu?</a>
-                </div>
-                <div className="social-login">
-                    <p>Đăng nhập bằng tài khoản xã hội của bạn</p>
-                    <div className="social-buttons">
+                {isLogin && (
+                    <div className="social-login">
+                        <p>Đăng nhập bằng tài khoản xã hội của bạn</p>
                         <button className="google"><AiOutlineGoogle /> Google</button>
                         <button className="facebook"><AiOutlineFacebook /> Facebook</button>
                     </div>
-                </div>
+                )}
             </div>
         </div>
     );
 };
 
-export default memo(LoginPage);
+export default LoginModal;
