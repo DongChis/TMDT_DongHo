@@ -6,14 +6,14 @@
 
 // Biến màu sắc
 $theme-color: (
-        main: #007bff,         // Màu chủ đạo
-        normal-text: #333,     // Màu chữ bình thường
-        secondary: #28a745,    // Secondary color
-        hover-main: #0056b3,   // Hover color for main
-        hover-secondary: #218838 // Hover color for secondary
+        main: #007bff,
+        normal-text: #333,
+        secondary: #28a745,
+        hover-main: #0056b3,
+        hover-secondary: #218838
 );
 
-// Phần styles chung
+
 .container {
   .section-title {
     margin-top: 50px;

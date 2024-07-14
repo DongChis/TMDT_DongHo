@@ -12,6 +12,7 @@ import "pages/Profile/style.scss"
 import {useNavigate} from "react-router-dom";
 import { loadProducts, addCartProducts } from '../../redux/actions/productAction';
 import { loadProductsSelector } from '../../redux/selector';
+import {Product} from "../../component/Product/Product";
 
 const HomePage = () => {
     const dispatch = useDispatch();
@@ -86,17 +87,11 @@ const HomePage = () => {
 
         Object.keys(data).forEach((title, index) => {
             tabList.push(<Tab key={index}>{title}</Tab>);
-            const products = data[title].map((item, idx) => (
-                <div className="product-card" key={idx}>
-                    <img src={item.productImageUrl} alt={item.name} className="product-image" />
-                    <h2 className="product-name">{item.name}</h2> {/* Hiển thị thuộc tính name */}
-                    <p className="product-description">{item.description}</p>
-                    <p className="product-price">{item.price.toLocaleString()} VND</p>
-                    <div className="btn-group">
-                        <button onClick={() => handleView(item)} className="btn-view">Xem</button>
-                        <button onClick={() => handleAddToCart(item)} className="btn-add-to-cart">Thêm</button>
-                    </div>
-                </div>
+            const products = data[title].map((product, idx) => (
+                <Product
+                    key={product.id}
+                    data={product}
+                />
             ));
             tabPanels.push(
                 <TabPanel key={index}>
