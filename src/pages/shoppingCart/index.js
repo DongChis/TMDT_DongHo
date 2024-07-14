@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './style.scss';
+import BreadCrumb from "../theme/breadCrum";
 
 const ShoppingCart = () => {
     const cartItems = useSelector(state => state.cart);
@@ -37,7 +38,7 @@ const ShoppingCart = () => {
 
     return (
         <>
-            <div className="bread-crumb">Giỏ hàng</div>
+            <BreadCrumb name="Giỏ hàng"></BreadCrumb>
             <div className="shopping-cart">
                 <div className="cart-items">
                     {cartItems.map(item => (
