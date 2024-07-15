@@ -122,6 +122,31 @@
     }
   }
 
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+
+    label {
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #444;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      outline: none;
+      transition: border-color 0.3s;
+
+      &:focus {
+        border-color: #131377;
+      }
+    }
+  }
+
   .cus-info {
     p {
       margin: 5px 0;
@@ -155,7 +180,7 @@
     display: block;
     width: 100%;
     padding: 15px;
-    background-color:#131377;
+    background-color: #131377;
     color: #fff;
     text-align: center;
     border: none;
@@ -168,5 +193,4 @@
       background-color: darken(#4242d5, 10%);
     }
   }
-
 }

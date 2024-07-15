@@ -23,7 +23,7 @@ const Checkout = () => {
     const [notificationMessage, setNotificationMessage] = useState('');
 
     const parsePrice = (priceString) => {
-        return priceString ? parseFloat(priceString.replace(/\./g, '')) : 0;
+        return  parseFloat(priceString.replace(/\./g, '')) ;
     };
 
     const calculateTotalPrice = () => {
@@ -163,10 +163,10 @@ const Checkout = () => {
                 )}
 
                 {deliveryMethod === 'store' && (
-                    <div className="cus-info">
+                    <div className="delivery-info">
                         <h3>Thông Tin Khách Hàng</h3>
                         <div className="input-group">
-                            <label htmlFor="cus-phone">Số điện thoại </label>
+                            <label htmlFor="cus-phone">Số điện thoại</label>
                             <input
                                 type="text"
                                 id="cus-phone"

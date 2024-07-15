@@ -10,7 +10,7 @@ const ShoppingCart = () => {
     const navigate = useNavigate();
 
     const parsePrice = (priceString) => {
-        return priceString ? parseFloat(priceString.replace(/\./g, '')) : 0;
+        return  parseFloat(priceString.replace(/\./g, '')) ;
     };
 
     const calculateTotalPrice = () => {
