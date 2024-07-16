@@ -35,6 +35,41 @@
       border-radius: 25px;
       padding: 5px;
       margin-top: 30px;
+
+      .toggle-button {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        background: none;
+        cursor: pointer;
+        border-radius: 25px;
+        z-index: 1;
+        text-align: center;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: #6200ea;
+        }
+
+        &.active {
+          color: white;
+        }
+      }
+
+      .toggle-slider {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 50%;
+        background: #6200ea;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+
+        &.right {
+          left: 50%;
+        }
+      }
     }
     .close-button {
       position: absolute;
@@ -74,88 +109,56 @@
         border-radius: 4px;
       }
     }
-  }
-}
 
+    .social-login {
+      text-align: center;
+      margin-top: 1rem;
 
+      p {
+        margin-bottom: 1rem;
+      }
 
+      button {
+        width: 100%;
+        padding: 0.75rem;
+        border: none;
+        margin-bottom: 0.5rem;
+        border-radius: 4px;
+        cursor: pointer;
 
+        &.google {
+          background: #db4437;
+          color: white;
+        }
 
-
-
-.toggle-button {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  border-radius: 25px;
-  z-index: 1;
-  text-align: center;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: #6200ea;
-  }
-
-  &.active {
-    color: white;
-  }
-}
-
-.toggle-slider {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 50%;
-  background: #6200ea;
-  border-radius: 25px;
-  transition: all 0.3s ease;
-
-  &.right {
-    left: 50%;
-  }
-}
-
-
-
-
-
-button[type="submit"] {
-  width: 100%;
-  padding: 0.75rem;
-  border: none;
-  background: #6200ea;
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.social-login {
-  text-align: center;
-  margin-top: 1rem;
-
-  p {
-    margin-bottom: 1rem;
-  }
-
-  button {
-    width: 100%;
-    padding: 0.75rem;
-    border: none;
-    margin-bottom: 0.5rem;
-    border-radius: 4px;
-    cursor: pointer;
-
-    &.google {
-      background: #db4437;
-      color: white;
+        &.facebook {
+          background: #3b5998;
+          color: white;
+        }
+      }
     }
 
-    &.facebook {
-      background: #3b5998;
+    button[type="submit"] {
+      width: 100%;
+      padding: 0.75rem;
+      border: none;
+      background: #6200ea;
       color: white;
+      border-radius: 4px;
+      cursor: pointer;
     }
+
+
   }
 }
+
+
+
+
+
+
+
+
+
+
+

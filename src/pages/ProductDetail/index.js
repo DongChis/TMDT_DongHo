@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import productAll from "../../data/dataAll";
 import BreadCrumb from "../../pages/theme/breadCrum";
 import "./style.scss"
+import {addCartProducts} from "../../redux/actions/productAction";
+import {useDispatch} from "react-redux";
 
 async function getProduct(id) {
     return productAll.find((product) => product.id == id);
@@ -19,6 +21,13 @@ const ProductDetail = () => {
     const [product, setProduct] = useState( null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const dispatch = useDispatch();
+
+    const handleAddToCart = (product) => {
+        console.log("Adding to cart:", product);
+        if (!product || !product.id) return;
+        dispatch(addCartProducts(product));
+    };
 
     useEffect(() => {
             window.scrollTo(0,0);
@@ -72,7 +81,7 @@ const ProductDetail = () => {
                                 <p className="product-detail-price">{product.price.toLocaleString()} VND</p>
                             </div>
                             <div className="button-group">
-                                <button className="add-cart">Thêm vào giỏ hàng</button>
+                                <button onClick={() => handleAddToCart(product)} className="btn-add-to-cart">Thêm vào giỏ hàng</button>
 
                             </div>
                         </div>
