@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Product } from "./Product/Product";
 import Pagination from './pagination/pagination';
-import './Product/style.scss'; // Import SCSS file
+import './Product/style.scss';
 
 const ProductList = () => {
     const products = useSelector(state => state.products);
     const [currentPage, setCurrentPage] = useState(1);
-    const productsPerPage = 9; // Display 9 products per page for 3x3 grid
+    const productsPerPage = 9;
     const [filter, setFilter] = useState('all');
     const [sort, setSort] = useState('asc');
     const [priceRange, setPriceRange] = useState([0, Infinity]);
@@ -48,7 +48,7 @@ const ProductList = () => {
         });
 
         setFilteredProducts(filtered);
-        setCurrentPage(1); // Reset to first page when filter or sort changes
+        setCurrentPage(1);
     }, [filter, sort, priceRange, brand, products]);
 
     const indexOfLastProduct = currentPage * productsPerPage;
