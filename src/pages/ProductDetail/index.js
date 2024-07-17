@@ -6,6 +6,7 @@ import "./style.scss"
 import {addCartProducts} from "../../redux/actions/productAction";
 import {useDispatch} from "react-redux";
 
+
 async function getProduct(id) {
     return productAll.find((product) => product.id == id);
 }
@@ -43,16 +44,11 @@ const ProductDetail = () => {
                 setLoading(false);
             }
         }
-
         fetchProduct();
-
-        // Clean-up function
         return () => {
-            // Any necessary clean-up code here
         };
-
     }
-    , [id]); // Only re-run the effect if id changes
+    , [id]);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -81,27 +77,16 @@ const ProductDetail = () => {
                                 <p className="product-detail-price">{product.price.toLocaleString()} VND</p>
                             </div>
                             <div className="button-group">
-                                <button onClick={() => handleAddToCart(product)} className="btn-add-to-cart">Thêm vào giỏ hàng</button>
+                                <button onClick={() => handleAddToCart(product)} className="btn-add-to-cart">Thêm vào
+                                    giỏ hàng
+                                </button>
 
                             </div>
                         </div>
                     </div>
-                    <div className="product-detail-specifications">
-                        <h2 className="specifications-header">Thông tin sản phẩm</h2>
-                        <ul className="specifications-list">
-                            <li><strong>Thương hiệu:</strong> Casio</li>
-                            <li><strong>Số hiệu sản phẩm:</strong> <a href="#">F-91W-1HDG</a></li>
-                            <li><strong>Bộ sưu tập:</strong> <a href="#">Casio F-91W</a></li>
-                            <li><strong>Xuất xứ:</strong> Nhật Bản</li>
-                            <li><strong>Giới tính:</strong> Nam</li>
-                            <li><strong>Kính:</strong> Resin Glass (Kính nhựa)</li>
-                            <li><strong>Máy:</strong> <a href="#">Quartz</a> (Pin)</li>
-                            <li><strong>Bảo hành quốc tế:</strong> 1 năm</li>
-                        </ul>
-                    </div>
                 </div>
 
-        </>
+            </>
     );
 };
 

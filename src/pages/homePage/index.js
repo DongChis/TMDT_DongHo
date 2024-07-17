@@ -1,4 +1,4 @@
-import React, {memo, useContext, useEffect, useState} from 'react'
+import React, {memo, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -7,34 +7,25 @@ import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import "./style.scss"
 import productAll   from "../../data/dataAll";
+import productHotData   from "../../data/productHot";
+
 import "./tag.scss"
 import "pages/Profile/style.scss"
-import {useNavigate} from "react-router-dom";
-import { loadProducts, addCartProducts } from '../../redux/actions/productAction';
-import { loadProductsSelector } from '../../redux/selector';
+import {loadProductHot, loadProducts} from '../../redux/actions/productAction';
+import { loadProductHotSelector,loadProductsSelector } from '../../redux/selector';
 import {Product} from "../../component/Product/Product";
 
 const HomePage = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate(); // Import and use navigate
+    const hotProduct = useSelector(loadProductHotSelector);
     const products = useSelector(loadProductsSelector);
 
     useEffect(() => {
-        console.log("Loading products...", productAll);
+        dispatch(loadProductHot(productHotData));
         dispatch(loadProducts(productAll));
     }, [dispatch]);
 
-    const handleAddToCart = (product) => {
-        console.log("Adding to cart:", product);
-        if (!product || !product.id) return; // Defensive check
-        dispatch(addCartProducts(product));
-    };
 
-    const handleView = (product) => {
-        console.log("Viewing product:", product);
-        if (!product || !product.id) return; // Defensive check
-        navigate(`/product/${product.id}`);
-    };
 
     const sliderSettings = {
         dots: true,
@@ -69,7 +60,7 @@ const HomePage = () => {
     const groupProductsByTitle = (data) => {
         console.log("Grouping products by title...", data);
         return data.reduce((acc, product) => {
-            if (!product || !product.title) return acc; // Defensive check
+            if (!product || !product.title) return acc;
             const { title } = product;
             if (!acc[title]) {
                 acc[title] = [];
@@ -122,12 +113,14 @@ const HomePage = () => {
     };
 
     const groupedProducts = groupProductsByTitle(products);
+    const groupedProductHot = groupProductsByTitle(hotProduct);
+
     console.log("Grouped products:", groupedProducts);
 
     return (
         <>
             {products.length > 0 && renderProducts(groupedProducts, "THƯƠNG HIỆU ĐỒNG HỒ")}
-            {products.length > 0 && renderProducts(groupedProducts, "SẢN PHẨM MỚI RA MẮT")}
+            {hotProduct.length > 0 && renderProducts(groupedProductHot, "SẢN PHẨM MỚI RA MẮT")}
         </>
     );
 };

@@ -1,9 +1,17 @@
 
 export const loadProducts = (data) => {
     return {
-        type: 'product.load',
+        type: 'productAll.load',
         payload: {
             products: data
+        }
+    }
+}
+export const loadProductHot = (data) => {
+    return {
+        type: 'productHot.load',
+        payload: {
+            productHot: data
         }
     }
 }
