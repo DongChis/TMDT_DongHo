@@ -36,7 +36,34 @@ const ProductList = () => {
 
         // lọc theo thương hiệu
         if (brand !== 'all') {
-            filtered = filtered.filter(product => product.brand === brand);
+            filtered = filtered.filter(product => product.title === brand);
+        }
+        if (brand === 'Seiko') {
+            filtered = filtered.filter(product => product.title === 'Seiko');
+        }
+        if (brand === 'KOI') {
+            filtered = filtered.filter(product => product.title === 'KOI');
+        }
+        if (brand === 'Candino') {
+            filtered = filtered.filter(product => product.title === 'Candino');
+        }
+        if (brand === 'Orient') {
+            filtered = filtered.filter(product => product.title === 'Orient');
+        }
+        if (brand === 'Tissot') {
+            filtered = filtered.filter(product => product.title === 'Tissot');
+        }
+        if (brand === 'Citizen') {
+            filtered = filtered.filter(product => product.title === 'Citizen');
+        }
+        if (brand === 'Saga') {
+            filtered = filtered.filter(product => product.title === 'Saga');
+        }
+        if (brand === 'Fossil') {
+            filtered = filtered.filter(product => product.title === 'Fossil');
+        }
+        if (brand === 'Rado') {
+            filtered = filtered.filter(product => product.title === 'Rado');
         }
 
 
@@ -47,8 +74,10 @@ const ProductList = () => {
             return sort === 'asc' ? priceA - priceB : priceB - priceA;
         });
 
+
         setFilteredProducts(filtered);
         setCurrentPage(1);
+
     }, [filter, sort, priceRange, brand, products]);
 
     const indexOfLastProduct = currentPage * productsPerPage;
@@ -71,17 +100,23 @@ const ProductList = () => {
                 </select>
                 <select value={brand} onChange={e => setBrand(e.target.value)}>
                     <option value="all">Thương hiệu</option>
-                    <option value="brand1">Brand 1</option>
-                    <option value="brand2">Brand 2</option>
-                    <option value="brand3">Brand 3</option>
+                    <option value="Seiko">Seiko</option>
+                    <option value="KOI">KOI</option>
+                    <option value="Candino">Candino</option>
+                    <option value="Orient">Orient</option>
+                    <option value="Tissot">Tissot</option>
+                    <option value="Citizen">Citizen</option>
+                    <option value="Saga">Saga</option>
+                    <option value="Fossil">Fossil</option>
+                    <option value="Rado">Rado</option>
                 </select>
-                <select value={priceRange} onChange={e => {
+                <select value={priceRange.join('-')} onChange={e => {
                     const [min, max] = e.target.value.split('-').map(Number);
                     setPriceRange([min, max]);
                 }}>
                     <option value="0-Infinity">Khoảng giá</option>
-                    <option value="0-1000000">Dưới 1,000,000</option>
-                    <option value="1000000-5000000">1,000,000 - 5,000,000</option>
+                    <option value="1000000-3000000">1,000,000 - 3,000,000</option>
+                    <option value="3000000-5000000">3,000,000 - 5,000,000</option>
                     <option value="5000000-10000000">5,000,000 - 10,000,000</option>
                     <option value="10000000-Infinity">Trên 10,000,000</option>
                 </select>

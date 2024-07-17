@@ -11,11 +11,14 @@ import LoginModal from 'pages/login/index';
 
 const Header = () => {
     const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+    const [activeMenu, setActiveMenu] = useState(0);
 
     const openLoginModal = () => setLoginModalOpen(true);
     const closeLoginModal = () => setLoginModalOpen(false);
+
     const location = useLocation();
     const navigate = useNavigate();
+
     const [isHome, setIsHome] = useState(location.pathname.length <= 1);
     const [isShowCategory, setShowCategory] = useState(isHome);
     const [menus, setMenus] = useState([
@@ -30,20 +33,6 @@ const Header = () => {
         {
             name: "Sản phẩm",
             path: ROUTERS.pages.PRODUCTS,
-            child: [
-                {
-                    name: "Đồng hồ nam",
-                    path: "/san-pham",
-                },
-                {
-                    name: "Đồng hồ nữ",
-                    path: "/san-pham",
-                },
-                {
-                    name: "Thương hiệu",
-                    path: "/san-pham",
-                },
-            ]
         },
         {
             name: "Bài viết",
@@ -142,17 +131,10 @@ const Header = () => {
                         <div className="header__menu">
                             <ul>
                                 {menus?.map((menus, menuKey) => (
-                                    <li key={menuKey} className={menuKey === 0 ? "active" : ""}>
+                                    <li key={menuKey} className={menuKey === activeMenu ? "active" : ""}
+                                        onClick={() => setActiveMenu(menuKey)}
+                                    >
                                         <Link to={menus?.path}>{menus?.name}</Link>
-                                        {menus.child && (
-                                            <ul className="header__menu__dropdown">
-                                                {menus.child.map((childItem, childKey) => (
-                                                    <li key={`${menuKey}-${childKey}`}>
-                                                        <Link to={childItem.path}>{childItem.name}</Link>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        )}
                                     </li>
                                 ))}
                             </ul>
