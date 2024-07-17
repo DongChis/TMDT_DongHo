@@ -1,6 +1,6 @@
 
 
-const productHot = [
+const productHotData = [
     {
         id: 56,
         title: 'Rado',
@@ -96,4 +96,4 @@ const productHot = [
 
 
 ];
-export default productHot;
+export default productHotData;

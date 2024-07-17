@@ -7,23 +7,22 @@ import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import "./style.scss"
 import productAll   from "../../data/dataAll";
-import productHot   from "../../data/productHot";
+import productHotData   from "../../data/productHot";
 
 import "./tag.scss"
 import "pages/Profile/style.scss"
 import {loadProductHot, loadProducts} from '../../redux/actions/productAction';
-import { loadProductsSelector } from '../../redux/selector';
+import { loadProductHotSelector,loadProductsSelector } from '../../redux/selector';
 import {Product} from "../../component/Product/Product";
 
 const HomePage = () => {
     const dispatch = useDispatch();
+    const hotProduct = useSelector(loadProductHotSelector);
     const products = useSelector(loadProductsSelector);
 
     useEffect(() => {
-
-            dispatch(loadProducts(productHot));
-
-
+        dispatch(loadProductHot(productHotData));
+        dispatch(loadProducts(productAll));
     }, [dispatch]);
 
 
@@ -114,13 +113,14 @@ const HomePage = () => {
     };
 
     const groupedProducts = groupProductsByTitle(products);
+    const groupedProductHot = groupProductsByTitle(hotProduct);
 
     console.log("Grouped products:", groupedProducts);
 
     return (
         <>
             {products.length > 0 && renderProducts(groupedProducts, "THƯƠNG HIỆU ĐỒNG HỒ")}
-            {products.length > 0 && renderProducts(groupedProducts, "SẢN PHẨM MỚI RA MẮT")}
+            {hotProduct.length > 0 && renderProducts(groupedProductHot, "SẢN PHẨM MỚI RA MẮT")}
         </>
     );
 };
