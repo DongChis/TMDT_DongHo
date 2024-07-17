@@ -282,7 +282,7 @@ const productAll = [
         description: 'Tissot Chemin Des Tourelles T099.407.11.037.00 – Nam – Automatic – Trữ Cót 80 Giờ, Kính Sapphire, Mặt Số 42mm',
         url: '#',
         gender: 'Nam',
-        price: '25.200.000',
+        price: '1.800.000',
 
         productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/T099.407.11.037.00.jpg'
     },{
