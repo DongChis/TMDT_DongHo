@@ -92,7 +92,54 @@ const productHotData = [
 
         productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/T006.407.16.053.00.jpg'
 
-    }
+    },{
+        id:138,
+        title: 'Rado',
+        name: 'Rado Captain Cook Bronze',
+        description: 'Rado Captain Cook Bronze – R32504315 – Trữ Cót 80 Giờ – Vỏ Đồng – Viền High-tech Ceramic – Nắp Lưng Titan – Chống Nước 30 ATM',
+        url: '#',
+        gender: 'Nam',
+        price: '85.000.000',
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/R32504315.jpg'
+    },{
+        id:139,
+        title: 'Rado',
+        name: 'Rado Diamaster R14061706',
+        description: 'Rado Diamaster R14061706 – Nam – Automatic (Tự Động) – Mặt Số 43mm, Kính Sapphire, Chống Nước 5ATM',
+        url: '#',
+        gender: 'Nam',
+        price: '94.500.000',
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/R14061706.jpg'
+    },{
+        id:140,
+        title: 'Rado',
+        name: 'Rado R30186923',
+        description: 'Rado R30186923 – Nữ – Kính Sapphire – Quartz (Pin) – Dây Kim Loại',
+        url: '#',
+        gender: 'Nữ',
+        price: '28.375.000',
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/21_R30186923.jpg'
+    },{
+        id: 21,
+        title: 'Orient',
+        name: 'Orient Star RE-AU0306L00B',
+        description: 'Orient Star RE-AU0306L00B – Nam – Kính Sapphire – Automatic (Tự Động) – Máy Nhật, Power Reserve, Mặt Số 43mm',
+        url: '#',
+        gender: 'Nam',
+        price: '25.500.000',
+
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/RE-AU0306L00B.jpg'
+    },{
+        id: 22,
+        title: 'Orient',
+        name: 'Orient Sun And Moon Open Heart RA-AS0101S10B',
+        description: 'Orient Sun And Moon Open Heart RA-AS0101S10B – Nam – Automatic (Tự Động) – Mặt Số 41mm, Trữ cót 40 Giờ, Hacking Second',
+        url: '#',
+        gender: 'Nam',
+        price: '13.560.000',
+
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/RA-AS0101S10B.jpg'
+    },
 
 
 ];
