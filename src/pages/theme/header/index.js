@@ -1,4 +1,4 @@
-import React, { memo, useContext, useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import "./style.scss";
 import {
     AiOutlineUser, AiOutlineTwitter, AiTwotoneStar,
@@ -6,12 +6,15 @@ import {
 } from "react-icons/ai";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ROUTERS } from "../../../utils/Router/router";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { searchProducts } from '../../../redux/actions/productAction';
 import LoginModal from 'pages/login/index';
 
 const Header = () => {
     const [isLoginModalOpen, setLoginModalOpen] = useState(false);
     const [activeMenu, setActiveMenu] = useState(0);
+    const [searchTerm, setSearchTerm] = useState(""); // State để lưu trữ giá trị tìm kiếm
+    const dispatch = useDispatch();
 
     const openLoginModal = () => setLoginModalOpen(true);
     const closeLoginModal = () => setLoginModalOpen(false);
@@ -81,10 +84,15 @@ const Header = () => {
         "Đồng hồ Saga",
         "Đồng hồ Fossil",
         "Đồng hồ Rado",
-
     ];
 
     const cartItems = useSelector(state => state.cart);
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        dispatch(searchProducts(searchTerm)); // Dispatch action tìm kiếm sản phẩm
+        navigate(ROUTERS.pages.PRODUCTS); // Điều hướng đến trang sản phẩm
+    };
 
     return (
         <>
@@ -173,8 +181,13 @@ const Header = () => {
                     <div className="col-lg-9 heros__search_container">
                         <div className="hero_search">
                             <div className="hero__search_form">
-                                <form action="">
-                                    <input type="text" placeholder="Bạn đang cần gì ? " />
+                                <form onSubmit={handleSearch}>
+                                    <input
+                                        type="text"
+                                        placeholder="Bạn đang cần gì?"
+                                        value={searchTerm}
+                                        onChange={(e) => setSearchTerm(e.target.value)}
+                                    />
                                     <button className="" type="submit">Tìm kiếm</button>
                                 </form>
                             </div>

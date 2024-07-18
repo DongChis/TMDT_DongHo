@@ -37,3 +37,9 @@ export const clearCart = () => {
         type: 'CLEAR_CART'
     };
 };
+export const searchProducts = (searchTerm) => {
+    return {
+        type: 'SEARCH_PRODUCTS',
+        payload: searchTerm.toString()
+    };
+};

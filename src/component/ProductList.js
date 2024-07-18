@@ -3,15 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { Product } from "./Product/Product";
 import Pagination from './pagination/pagination';
 import './Product/style.scss';
+import { searchProducts } from '../redux/actions/productAction';
 
 const ProductList = () => {
-    const products = useSelector(state => state.products);
+    const dispatch = useDispatch();
+    const products = useSelector(state => state.filteredProducts);
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 9;
     const [filter, setFilter] = useState('all');
     const [sort, setSort] = useState('asc');
     const [priceRange, setPriceRange] = useState([0, Infinity]);
     const [brand, setBrand] = useState('all');
+    const [searchTerm, setSearchTerm] = useState('');
     const [filteredProducts, setFilteredProducts] = useState([]);
 
     useEffect(() => {
@@ -72,7 +75,6 @@ const ProductList = () => {
             filtered = filtered.filter(product => product.title === 'SRWatch');
         }
 
-
         // Tạo bản sao của mảng đã lọc trước khi sắp xếp
         filtered = [...filtered].sort((a, b) => {
             const priceA = parseFloat(a.price.replace(/\./g, ''));
@@ -80,11 +82,15 @@ const ProductList = () => {
             return sort === 'asc' ? priceA - priceB : priceB - priceA;
         });
 
-
         setFilteredProducts(filtered);
         setCurrentPage(1);
 
     }, [filter, sort, priceRange, brand, products]);
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        dispatch(searchProducts(searchTerm));
+    };
 
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -95,6 +101,13 @@ const ProductList = () => {
     return (
         <div className="container">
             <div className="filter">
+                <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={e => setSearchTerm(e.target.value)}
+                    placeholder="Tìm kiếm sản phẩm"
+                />
+                <button onClick={handleSearch}>Tìm kiếm</button>
                 <select value={filter} onChange={e => setFilter(e.target.value)}>
                     <option value="all">Tất cả</option>
                     <option value="male">Đồng hồ nam</option>
