@@ -101,13 +101,7 @@ const ProductList = () => {
     return (
         <div className="container">
             <div className="filter">
-                <input
-                    type="text"
-                    value={searchTerm}
-                    onChange={e => setSearchTerm(e.target.value)}
-                    placeholder="Tìm kiếm sản phẩm"
-                />
-                <button onClick={handleSearch}>Tìm kiếm</button>
+                
                 <select value={filter} onChange={e => setFilter(e.target.value)}>
                     <option value="all">Tất cả</option>
                     <option value="male">Đồng hồ nam</option>
