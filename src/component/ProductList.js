@@ -65,6 +65,12 @@ const ProductList = () => {
         if (brand === 'Rado') {
             filtered = filtered.filter(product => product.title === 'Rado');
         }
+        if (brand === 'Baby-G') {
+            filtered = filtered.filter(product => product.title === 'Baby-G');
+        }
+        if (brand === 'SRWatch') {
+            filtered = filtered.filter(product => product.title === 'SRWatch');
+        }
 
 
         // Tạo bản sao của mảng đã lọc trước khi sắp xếp
@@ -109,6 +115,8 @@ const ProductList = () => {
                     <option value="Saga">Saga</option>
                     <option value="Fossil">Fossil</option>
                     <option value="Rado">Rado</option>
+                    <option value="Baby-G">Baby-G</option>
+                    <option value="SRWatch">SRWatch</option>
                 </select>
                 <select value={priceRange.join('-')} onChange={e => {
                     const [min, max] = e.target.value.split('-').map(Number);
