@@ -199,6 +199,7 @@
 
 .heros__categories {
   position: relative;
+  z-index: 1000;
 
 
   .heros__categories_all {
@@ -255,7 +256,8 @@
     }
 
     &.hidden {
-      opacity: 0;
+      //opacity: 0;
+      display: none;
 
     }
   }

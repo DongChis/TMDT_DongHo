@@ -199,5 +199,9 @@ $theme-color: (
         background-color: map.get($theme-color, "hover-secondary");
       }
     }
+
+    .product-views {
+      opacity: 0.5;
+    }
   }
 }

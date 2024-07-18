@@ -1,15 +1,21 @@
-import React, {useState} from "react";
-import {useDispatch} from "react-redux";
-import {Link} from "react-router-dom";
-import {useNavigate} from "react-router-dom";
-import {addCartProducts} from "../../redux/actions/productAction";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { addCartProducts } from "../../redux/actions/productAction";
 
-import "./style.scss"
+import "./style.scss";
 
-
-export function Product({ data }) {
+export function Product({ data, onView }) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [views, setViews] = useState(0);
+
+    useEffect(() => {
+        const storedViews = localStorage.getItem(`product-${data.id}-views`);
+        if (storedViews) {
+            setViews(parseInt(storedViews, 10));
+        }
+    }, [data.id]);
 
     const handleAddToCart = (product) => {
         console.log("Adding to cart:", product);
@@ -18,14 +24,21 @@ export function Product({ data }) {
     };
 
     const handleView = (product) => {
-        console.log("Viewing product:", product);
-        if (!product || !product.id) return;
+        if (onView) {
+            onView(product);
+        }
+        // Increase the view count and navigate
+        const newViews = views + 1;
+        setViews(newViews);
+        localStorage.setItem(`product-${product.id}-views`, newViews);
+
         navigate(`/product/${product.id}`);
     };
 
+
     return (
         <div className="product-card" key={data.id}>
-            <img src={data.productImageUrl} alt={data.name} className="product-image"/>
+            <img src={data.productImageUrl} alt={data.name} className="product-image" />
             <h2 className="product-name">{data.name}</h2>
             <p className="product-description">{data.description}</p>
             <p className="product-price">{data.price.toLocaleString()} VND</p>
@@ -33,6 +46,7 @@ export function Product({ data }) {
                 <button onClick={() => handleView(data)} className="btn-view">Xem</button>
                 <button onClick={() => handleAddToCart(data)} className="btn-add-to-cart">Thêm</button>
             </div>
+            <p className="product-views">Lượt xem: {views}</p>
         </div>
     );
 }
