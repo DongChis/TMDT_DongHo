@@ -1,8 +1,11 @@
 // src/redux/reducers/productReducer.js
 import { createReducer } from "@reduxjs/toolkit";
+import productAll from '../../data/dataAll';
+
 
 const initialState = {
-    products: [],
+    products: productAll,
+    filteredProducts: productAll,
     cart: checkCart(),
 };
 
@@ -16,14 +19,15 @@ export const root = createReducer(initialState, (builder) => {
             lop1: for (const p of products) {
                 for (const c of cart) {
                     if (c.id === p.id) {
-                        out.push({...p, isBuying: true, color: 'red'});
+                        out.push({ ...p, isBuying: true, color: 'red' });
                         continue lop1;
                     }
                 }
-                out.push({...p, isBuying: false, color: 'blue'});
+                out.push({ ...p, isBuying: false, color: 'blue' });
             }
 
             state.products = out;
+            state.filteredProducts = out;
         })
         .addCase('productHot.load', (state, action) => {
             let products = action.payload.productHot;
@@ -33,11 +37,11 @@ export const root = createReducer(initialState, (builder) => {
             lop1: for (const p of products) {
                 for (const c of cart) {
                     if (c.id === p.id) {
-                        out.push({...p, isBuying: true, color: 'red'});
+                        out.push({ ...p, isBuying: true, color: 'red' });
                         continue lop1;
                     }
                 }
-                out.push({...p, isBuying: false, color: 'blue'});
+                out.push({ ...p, isBuying: false, color: 'blue' });
             }
 
             state.productHot = out;
@@ -60,6 +64,12 @@ export const root = createReducer(initialState, (builder) => {
         .addCase('CLEAR_CART', (state) => {
             state.cart = [];
             saveCart(state.cart);
+        })
+        .addCase('SEARCH_PRODUCTS', (state, action) => {
+            const searchTerm = action.payload.toLowerCase();
+            state.filteredProducts = state.products.filter(product =>
+                product.description.toLowerCase().includes(searchTerm)
+            );
         });
 });
 
