@@ -7,7 +7,8 @@ import {CartProvider} from "./component/CartContext";
 import {useDispatch} from "react-redux";
 import {useEffect} from "react";
 import {loadProducts} from "./redux/actions/productAction";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
                      </RouterCustom>
                 </CartProvider>
              </BrowserRouter>,
+            <ToastContainer />
         </div>
     )
 

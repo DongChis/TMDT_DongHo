@@ -5,6 +5,7 @@ import BreadCrumb from "../../pages/theme/breadCrum";
 import "./style.scss"
 import {addCartProducts} from "../../redux/actions/productAction";
 import {useDispatch} from "react-redux";
+import {toast} from "react-toastify";
 
 
 async function getProduct(id) {
@@ -28,6 +29,15 @@ const ProductDetail = () => {
         console.log("Adding to cart:", product);
         if (!product || !product.id) return;
         dispatch(addCartProducts(product));
+        toast.success("Sản phẩm đã được thêm vào giỏ hàng!", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
     };
 
     useEffect(() => {

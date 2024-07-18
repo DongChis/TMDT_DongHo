@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addCartProducts } from "../../redux/actions/productAction";
+import { toast } from "react-toastify";
 
 import "./style.scss";
 
@@ -21,6 +22,16 @@ export function Product({ data, onView }) {
         console.log("Adding to cart:", product);
         if (!product || !product.id) return;
         dispatch(addCartProducts(product));
+        toast.success("Sản phẩm đã được thêm vào giỏ hàng!", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+
     };
 
     const handleView = (product) => {
