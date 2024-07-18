@@ -193,7 +193,7 @@ const Header = () => {
                             </div>
                             <div className="hero__search_phone">
                                 <div className="hero__search_phone_icon">
-                                    <AiOutlinePhone />
+                                    <AiOutlinePhone/>
                                 </div>
                                 <div className="hero__search_phone_text">
                                     <p>0123.456.789</p>
@@ -209,7 +209,7 @@ const Header = () => {
                                             key={index}
                                             className={`slide ${index === activeIndex ? 'active' : ''}`}
                                         >
-                                            <img src={slide} alt={`Slide ${index}`} />
+                                            <img src={slide} alt={`Slide ${index}`}/>
                                         </div>
                                     ))}
                                 </div>
