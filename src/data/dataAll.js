@@ -557,16 +557,684 @@ const productAll = [
 
         productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/R30246712.jpg'
     },{
-        id: 56,
-        title: 'Rado',
-        name: 'Rado Captain Cook Bronze',
-        description: 'Rado Captain Cook Bronze – R32504205 – Trữ Cót 80 Giờ – Vỏ Đồng – Viền High-tech Ceramic – Nắp Lưng Titan – Chống Nước 30 ATM',
+        id:56,
+        title: 'Baby-G',
+        name: 'Baby-G BGD-565RP-7DR',
+        description: 'Baby-G BGD-565RP-7DR – Nữ – Kính cứng – Thiết kế dây đeo màu be trẻ trung, năng động – Mặt số điện tử kết hợp hoạ tiết hoa lá đáng yêu',
+        url: '#',
+        gender: 'Nữ',
+        price: '2.973.000',
+
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2024/02/BGD-565RP-7dr.jpg'
+    },{
+        id:57,
+        title: 'Baby-G',
+        name: 'Baby-G BGD-565SC-4DR',
+        description: 'Baby-G BGD-565SC-4DR – Nữ – Quartz (Pin) – Dây Cao Su – Mặt Số 37.9mm',
+        url: '#',
+        gender: 'Nữ',
+        price: '2.973.000',
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/10/BGD-565SC-4DR.jpg'
+    },{
+        id:58,
+        title: 'Baby-G',
+        name: 'Baby-G BA-120LP-2ADR',
+        description: 'Baby-G BA-120LP-2ADR – Nữ – Quartz (Pin) – Dây Cao Su',
+        url: '#',
+        gender: 'Nữ',
+        price: '4.343.000',
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/BA-120LP-2ADR.jpg'
+    },{
+        id:59,
+        title: 'Baby-G',
+        name: 'Baby-G BGA-280SW-4ADR',
+        description: 'Baby-G BGA-280SW-4ADR – Nữ – Kính cứng – Thiết kế tông màu cam sành điệu và nổi bật – Chế độ dạ quang đèn led độc đáo',
+        url: '#',
+        gender: 'Nữ',
+        price: '3.321.000 ',
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2024/03/BGA-280SW-4A_front.jpg'
+    },{
+        id:60,
+        title: 'Baby-G',
+        name: 'Baby-G BGA-280SW-6ADR',
+        description: 'Baby-G BGA-280SW-6ADR – Nữ – Kính cứng – Thiết kế tông màu tím trẻ trung năng động – Chế độ dạ quang đèn led độc đáo',
+        url: '#',
+        gender: 'Nữ',
+        price: '3.321.000',
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2024/03/Mau-Baby-G-BGA-280SW-6ADR.jpg'
+    },{
+        id:61,
+        title: 'Baby-G',
+        name: 'Baby-G BGD-565US-7DR',
+        description: 'Baby-G BGD-565US-7DR – Nữ – Kính cứng – Thiết kế sắc trắng trẻ trung, năng động – Mặt số điện tử tích hợp nhiều chức năng',
+        url: '#',
+        gender: 'Nữ',
+        price: '2.973.000',
+        productImageUrl: 'https://donghohaitrieu.com/wp-content/uploads/2024/02/bgd-565us-7dr-3.webp'
+    },{
+        id:62,
+        title: 'Baby-G',
+        name: 'Baby-G BGA-320-7A1DR',
+        description: 'Baby-G BGA-320-7A1DR – Nữ – Quartz (Pin) – Dây Cao Su – Mặt Số 42.4mm, Kính Cứng, Chống Nước 10ATM',
+        url: '#',
+        gender: 'Nữ',
+        price: '3.673.000',
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/10/BGA-320-7A1DR.jpg'
+    },{
+        id:63,
+        title: 'Baby-G',
+        name: 'Baby-G BGD-565SC-3DR',
+        description: 'Baby-G BGD-565SC-3DR – Nữ – Quartz (Pin) – Mặt Số 37.9mm, Kính Cứng, Chống Nước 10ATM',
+        url: '#',
+        gender: 'Nữ',
+        price: '2.973.000',
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/10/BGD-565SC-3DR.jpg'
+    },{
+        id:64,
+        title: 'Baby-G',
+        name: 'Baby-G BGD-565SC-2DR',
+        description: 'Baby-G BGD-565SC-2DR – Nữ – Quartz (Pin) – Dây Cao Su – Mặt Số 37.9mm',
+        url: '#',
+        gender: 'Nữ',
+        price: '2.973.000',
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/10/BGD-565SC-2DR.jpg'
+    },{
+        id:65,
+        title: 'Baby-G',
+        name: 'Baby-G BGA-290-1ADR',
+        description: 'Baby-G BGA-290-1ADR – Nữ – Quartz (Pin) – Dây Cao Su – Mặt Số 41mm',
+        url: '#',
+        gender: 'Nữ',
+        price: '3.932.000',
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/BGA-290-1ADR.jpg'
+    },{
+        id:66,
+        title: 'Baby-G',
+        name: 'Baby-G BA-130-7A1DR',
+        description: 'Baby-G BA-130-7A1DR – Nữ – Quartz (Pin) – Mặt Số 46.3mm, Kính Cứng, Chống Nước 10ATM',
+        url: '#',
+        gender: 'Nữ',
+        price: '4.407.000',
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/36_BA-130-7A1DR.jpg'
+    },{
+        id:67,
+        title: 'SRWatch',
+        name: 'SR SL1605.1302TE',
+        description: 'SR SL1605.1302TE – Nữ – Kính Sapphire – Quartz (Pin) – Mặt Số 30mm, Mạ Vàng PVD, Đính Đá Pha Lê',
+        url: '#',
+        gender: 'Nữ',
+        price: '1.850.000',
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/SL1605.1302TE.jpg'
+    },{
+        id:68,
+        title: 'SRWatch',
+        name: 'SR SL1607.4602TE',
+        description: 'SR SL1607.4602TE – Nữ – Kính Sapphire – Quartz (Pin) – Mặt Số 30mm, Đính Đá Pha Lê, Chống Nước 5ATM',
+        url: '#',
+        gender: 'Nữ',
+        price: '1.850.000',
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/SL1607.4602TE.jpg'
+    },{
+        id:69,
+        title: 'SRWatch',
+        name: 'SR SL1607.4902TE',
+        description: 'SR SL1607.4902TE – Nữ – Kính Sapphire – Quartz (Pin) – Dây Da – Mặt Số 30mm',
+        url: '#',
+        gender: 'Nữ',
+        price: '1.850.000',
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/SL1607.4902TE.1.jpg'
+    },{
+        id:70,
+        title: 'SRWatch',
+        name: 'SR SG1056.4601TE',
+        description: 'SR SG1056.4601TE – Nam – Quartz (Pin) – Mặt Số 39mm, Kính Sapphire, Chống Nước 5ATM',
         url: '#',
         gender: 'Nam',
-        price: '85.000.000',
-
-        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/R32504205.jpg'
+        price: '1.950.000',
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/SG1056.4601TE.1.jpg'
+    },{
+        id:71,
+        title: 'SRWatch',
+        name: 'SR SL80060.4101CF',
+        description: 'SR SL80060.4101CF – Nữ – Quartz (Pin) – Mặt Số 30mm, Kính Sapphire, Chống Nước 5ATM',
+        url: '#',
+        gender: 'Nữ',
+        price: '1.950.000',
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/SL80060.4101CF.jpg'
+    },{
+        id:72,
+        title: 'SRWatch',
+        name: 'SR SG8897.4102',
+        description: 'SR SG8897.4102 – Nam – Kính Sapphire – Automatic (Tự Động) – Mặt Số 42mm, Skeleton, Trữ Cót 40 Giờ',
+        url: '#',
+        gender: 'Nam',
+        price: '5.280.000',
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/SG8897.4102.jpg'
+    },{
+        id:73,
+        title: 'SRWatch',
+        name: 'SR SG19192.1102',
+        description: 'SR SG19192.1102 – Nam – Kính Sapphire – Automatic – Mặt Số 42mm, Japan Movt, Chống Nước 5 ATM',
+        url: '#',
+        gender: 'Nam',
+        price: '7.450.000',
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/SG19192.1102.jpg'
+    },{
+        id:74,
+        title: 'SRWatch',
+        name: 'SR SG9002.1102',
+        description: 'SR SG9002.1102 – Nam – Kính Sapphire – Quartz (Pin) – Dây Kim Loại – Mặt Số 39mm',
+        url: '#',
+        gender: 'Nam',
+        price: '2.900.000',
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/SG9002.1102.jpg'
+    },{
+        id:75,
+        title: 'SRWatch',
+        name: 'SR SL1605.1402TE',
+        description: 'SR SL1605.1402TE – Nữ – Kính Sapphire – Quartz (Pin) – Dây Kim Loại – Mặt Số 30mm',
+        url: '#',
+        gender: 'Nữ',
+        price: '1.850.000',
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/SL1605.1402TE.jpg'
+    },{
+        id:76,
+        title: 'SRWatch',
+        name: 'SR SL5521.1102',
+        description: 'SR SL5521.1102 – Nữ – Quartz (Pin) – Dây Kim Loại – Mặt Số 28mm, Kính Sapphire, Chống Nước 5ATM',
+        url: '#',
+        gender: 'Nữ',
+        price: '2.750.000',
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/SL5521.1102.jpg'
+    },{
+        id:77,
+        title: 'SRWatch',
+        name: 'SR SG60062.4102SM',
+        description: 'SR SG60062.4102SM – Nam – Kính Sapphire – Quartz (Pin) – Mặt số 40mm, Moonphase, chống nước 5ATM',
+        url: '#',
+        gender: 'Nam',
+        price: '6.250.000',
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/SG60062.4102SM.jpg'
+    },{
+        id:78,
+        title: 'SRWatch',
+        name: 'SR SG8894.1102',
+        description: 'SR SG8894.1102 – Nam – Kính Sapphire – Automatic (Tự Động) – Mặt Số 40mm, Skeleton, Chống Nước 5ATM',
+        url: '#',
+        gender: 'Nam',
+        price: '5.390.000',
+        productImageUrl: 'https://image.donghohaitrieu.com/wp-content/uploads/2023/09/SG8894.1102.jpg'
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:80,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
+    },{
+        id:79,
+        title: '',
+        name: '',
+        description: '',
+        url: '#',
+        gender: '',
+        price: '',
+        productImageUrl: ''
     },
+
+
 
 
 ];
